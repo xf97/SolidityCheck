@@ -13,9 +13,16 @@ author=__xiaofeng__
 #include <iomanip>
 
 
-string Overflow::RewriteCon(const string  _str, const vector<string>& _ope)
+string Overflow::GetVariable(int _count)
 {
-	string temp = "\tuint256 anti_overflow_temp = "+_ope[0]+";\n";
+	string temp = "\tuint256 anti_overflow_temp_";
+	temp += to_string(_count);
+	return temp;
+}
+
+string Overflow::RewriteCon(const string  _str, const vector<string>& _ope,int _count)
+{
+	string temp = GetVariable(_count)+" = "+_ope[0]+";\n";
 	if (_str.find("-=") < _str.size() || _str.find("*=") < _str.size()) {
 		temp += _str;
 		return temp;
@@ -221,14 +228,14 @@ vector<string> Overflow::GetOpe(const string & _str)
 	return results;
 }
 
-string Overflow::GetCode(const string & _str, const vector<string>& _ope,bool _flag)
+string Overflow::GetCode(const string & _str, const vector<string>& _ope,bool _flag,string _vari)
 {
 	if (_flag) {
 		if (_str.find("*") < _str.size() && _str.find("=") < _str.size()) {
-			return "\n require(" + _ope[1] + "==0 || " + _ope[0] + "/" + _ope[1] + "==anti_overflow_temp);\n";
+			return "\n require(" + _ope[1] + "==0 || " + _ope[0] + "/" + _ope[1] + "=="+_vari+");\n";
 		}
 		else if (_str.find("-") < _str.size() && _str.find("=") < _str.size()) {
-			return "\n require(anti_overflow_temp > " + _ope[2] + " );\n";
+			return "\n require("+_vari+" > " + _ope[2] + " );\n";
 		}
 	}
 	int type = GetType(_str);
@@ -345,6 +352,7 @@ void Overflow::Detection()
 {
 	bool flag = false;
 	cout << "-----Start detecting-----\n";
+	int count = 0;
 	for (int i = 0; i < content.size(); i++) {
 		double rate = (double)(i + 1) / (content.size());
 		cout << "\r" <<setiosflags(ios::fixed)<<setprecision(0)<<(rate*100)<<"%"<<ProcessBar(int(rate*100));
@@ -357,7 +365,8 @@ void Overflow::Detection()
 			InsertFlag = true;
 			row_number.push_back((i + 1));
 			vector<string> opes = GetOpe(content[i]);
-			string insertCode = GetCode(content[i], opes,flag);
+			string no = "";
+			string insertCode = GetCode(content[i], opes,flag,no);
 			content[i] += insertCode;
 		}
 		else if (NewIsOperation(content[i])) {
@@ -367,10 +376,11 @@ void Overflow::Detection()
 			vector<string> opes = GetOpe(temp);
 			if (content[i].find("-=") < content[i].size() || content[i].find("*=") < content[i].size()) {
 				//special statement.rewrite content[i]
-				content[i] = RewriteCon(content[i], opes);
+				count++;
+				content[i] = RewriteCon(content[i], opes,count);
 				flag = true;
 			}
-			string insertCode = GetCode(temp, opes,flag);
+			string insertCode = GetCode(temp, opes,flag,GetVariable(count));
 			flag = false;
 			content[i] += insertCode;
 		}
