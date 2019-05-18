@@ -42,7 +42,8 @@ private:
 	string OtherOperation;
 	bool InsertFlag;
 protected:
-	string RewriteCon(const string _str, const vector<string>& _ope);
+	string GetVariable(int _count);
+	string RewriteCon(const string _str, const vector<string>& _ope,int _count);
 	string GetLeft(const string& _str);
 	string GetRight(const string& _str);
 	string RewriteSta(const string& _str);
@@ -53,7 +54,7 @@ protected:
 	bool IsCIL(const string& _str);
 	void OutVec(const vector<string>& _vec);
 	vector<string> GetOpe(const string& _str);
-	string GetCode(const string& _str, const vector<string>& _ope,bool _flag);
+	string GetCode(const string& _str, const vector<string>& _ope,bool _flag,string _vari);
 	int GetType(const string& _str);
 	int GetNewType(const string& _str);
 	void OutputPosition();
