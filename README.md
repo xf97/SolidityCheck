@@ -1,9 +1,9 @@
 # SolidityCheck
-SolidityCheck说明文档
-本文档介绍关于SolidityCheck的使用方法和文件组织结构
-使用方法：
-win10
-将SolidityCheck使用visual studio编译生成可执行程序后，加入到系统的path变量中，继而可以通过命令行的形式调用。
+SolidityCheck说明文档\n
+本文档介绍关于SolidityCheck的使用方法和文件组织结构\n
+使用方法：\n
+win10\n
+将SolidityCheck使用visual studio编译生成可执行程序后，加入到系统的path变量中，继而可以通过命令行的形式调用。\n
 使用命令：
 SolidityCheck --help 获取帮助
 SolidityCheck --d    问题检测
