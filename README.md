@@ -1,18 +1,30 @@
 # SolidityCheck
-SolidityCheck说明文档\n
-本文档介绍关于SolidityCheck的使用方法和文件组织结构\n
-使用方法：\n
-win10\n
-将SolidityCheck使用visual studio编译生成可执行程序后，加入到系统的path变量中，继而可以通过命令行的形式调用。\n
+SolidityCheck说明文档
+
+本文档介绍关于SolidityCheck的使用方法和文件组织结构
+
+使用方法：
+win10
+
+将SolidityCheck使用visual studio编译生成可执行程序后，加入到系统的path变量中，继而可以通过命令行的形式调用。
+
 使用命令：
 SolidityCheck --help 获取帮助
+
 SolidityCheck --d    问题检测
+
 SolidityCheck --o	 整数溢出问题预防
+
 SolidityCheck --r	 重入问题检测及预防
+
 SolidityCheck --s	 设定新的昂贵的循环阈值
+
 SolidityCheck --g 	 查看现有的昂贵的循环阈值
+
 SolidityCheck --f    批量问题检测
+
 文件组织结构：
+
 SolidityCheck使用C++语言开发，包含28个头文件，以及29个源文件，除了main.cpp文件外，每一个头文件都有一个同名的对应源文件。main函数声明和定义于main.cpp中。
 
 注意事项：
