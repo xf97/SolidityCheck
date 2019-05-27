@@ -4,6 +4,7 @@ SolidityCheck说明文档
 本文档介绍关于SolidityCheck的使用方法和文件组织结构
 
 使用方法：
+
 win10
 
 将SolidityCheck使用visual studio编译生成可执行程序后，加入到系统的path变量中，继而可以通过命令行的形式调用。
@@ -40,6 +41,7 @@ This document describes the use of SolidityCheck and its file organization struc
 Usage method:
 
 Win10
+
 After compiling SolidityCheck into executable program using visual studio, it is added to the path variable of the system and then invoked in the form of command line.
 
 Use commands:
