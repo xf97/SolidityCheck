@@ -33,9 +33,11 @@ const static string UC_CALL3 = ".call.";
 const static string UC_DELE1 = ".delegatecall(";
 const static string UC_DELE2 = ".delegatecall ";
 const static string UC_DELE3 = ".delegatecall.";
+const static string UC_CALLCODE1 = ".callcode.";
+const static string UC_CALLCODE2 = ".callcode ";
 
 //regex definition,regex_search
-const static string UC_RE_IF = "^(\\s)*((if)|(require))(\\s)*(\\()(.)*((\\w)|(\\()|(\\))|(\\[)|(\\])|(\\.))+(\\.)((send)|(delegatecall)|(call))(.)*(\\()(.)*(\\))(.)*(\\))";
+const static string UC_RE_IF = "^(\\s)*((if)|(require))(\\s)*(\\()(.)*((\\w)|(\\()|(\\))|(\\[)|(\\])|(\\.))+(\\.)((send)|(delegatecall)|(call)|(callcode))(.)*(\\()(.)*(\\))(.)*(\\))";
 
 //Unchecked Call class
 class Call {
@@ -53,6 +55,7 @@ protected:
 	bool IsCall(const string& _str);
 	bool IsDele(const string& _str);
 	bool IsSend(const string& _str);
+	bool IsCallCode(const string& _str);
 public:
 	//constructor
 	Call(const string _report_name, const vector<string> _content);
