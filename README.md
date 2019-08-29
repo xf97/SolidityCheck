@@ -23,5 +23,9 @@ Functions:
     Adjust costly loop standard		---->		SolidityCheck --g<br>
     Look at existing expensive cycling standards		---->		SolidityCheck --s<br>
     Batch testing		---->		SolidityCheck --f<br>
+    
+License:
+--------
+SolidityCheck is released under the MIT License.
 
 
