@@ -17,10 +17,11 @@ Functions:
     Get help information	---->		SolidityCheck --help<br>
     Generating contracts to prevent re-entrancy vulnerabilities		---->		SolidityCheck --r<br>
     Generating contracts to prevent integer overflow problems		---->		SolidityCheck --o<br>
-    Detection of 24 other problems except integer overflow and re-entrancy vulnerabilities		---->		SolidityCheck --d<br>
+    Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		---->		SolidityCheck --d<br>
     Adjust costly loop standard		---->		SolidityCheck --g<br>
     Look at existing expensive cycling standards		---->		SolidityCheck --s<br>
     Batch testing		---->		SolidityCheck --f<br>
+    Generate contracts to detect reentrant vulnerabilities	---->		SolidityCheck --ir<br>
     
 License:
 --------
