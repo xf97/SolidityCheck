@@ -30,7 +30,8 @@ SolidityCheck is released under the MIT License.
 
 Note:
 --------
-We hide the source code for the time being, and it won't be long before they come back.
+Because there were some problems with the original code, we deleted the previous submission record and hide the source code for the time being, and it won't be long before they come back. 
+
 
 
 
