@@ -30,6 +30,9 @@ Note:
 --------
 Because there were some problems with the original code, we deleted the previous submission record and hide the source code for the time being, and it won't be long before they come back. 
 
+Warning:
+---------
+This procedure has been applied for patent protection, any infringement of intellectual property will be taken to law.
 
 
 
