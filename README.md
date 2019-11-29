@@ -9,9 +9,7 @@ Experiments show that SolidityCheck is a very effective smart contract problem d
 
 Usage:
 ------
-We will publish all the source code of SolidityCheck, which is developed using Visual Studio 2017. <br>
-**After compiling all source code files, the generated executable program(.exe) is added to the path 
-variable of the system and invoked through the DOS.**
+**We provide the user manual of SolidityCheck, which introduces the various functions of SolidityCheck. The Chinese version has been released. The English version will be available later.**
 
 Functions:
 ----------
