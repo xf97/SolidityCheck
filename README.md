@@ -8,14 +8,20 @@ First, the source code is formatted so that regular expressions can be retrieved
 
 You can find our paper [here](https://arxiv.xilesou.top/abs/1911.09425).
 
-Feature
+Usage:
 ------
 **We provide the user manual of SolidityCheck, which introduces the various functions of SolidityCheck. The Chinese version has been released. The English version will be available later.**
 
-Functions:
+You can find the Chinese manual [here](https://github.com/xf97/SolidityCheck/blob/master/SolidityCheck使用手册.pdf).
+
+Features:
 ----------
-**Type the following commands to invoke different functions**<br>
-    Get help information	---->		SolidityCheck --help<br>
+**Type the following commands to invoke different functions**
+
+    Get help information
+    '''
+    SolidityCheck --help
+    '''
     Generating contracts to prevent re-entrancy vulnerabilities		---->		SolidityCheck --r<br>
     Generating contracts to prevent integer overflow problems		---->		SolidityCheck --o<br>
     Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		---->		SolidityCheck --d<br>
