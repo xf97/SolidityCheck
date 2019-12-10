@@ -1,6 +1,6 @@
 SolidityCheck
 =============
-![avatar](logo.jpg)
+<img src="./logo.jpg" alt="Logo" width="500"/>
 **SolidityCheck is a static code problem analysis tool based on regular expressions and program instrumentation, which is developed for Ethereum smart contracts.**
 
 **SolidityCheck** receives the *Solidity* source code files of smart contracts. 
@@ -17,18 +17,38 @@ You can find the Chinese manual [here](https://github.com/xf97/SolidityCheck/blo
 Features:
 ----------
 **Type the following commands to invoke different functions**
-
     Get help information
     '''
     SolidityCheck --help
     '''
-    Generating contracts to prevent re-entrancy vulnerabilities		---->		SolidityCheck --r<br>
-    Generating contracts to prevent integer overflow problems		---->		SolidityCheck --o<br>
-    Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		---->		SolidityCheck --d<br>
-    Adjust costly loop standard		---->		SolidityCheck --g<br>
-    Look at existing expensive cycling standards		---->		SolidityCheck --s<br>
-    Batch testing		---->		SolidityCheck --f<br>
-    Generate contracts to detect reentrant vulnerabilities	---->		SolidityCheck --ir<br>
+    Generating contracts to prevent re-entrancy vulnerabilities		
+    '''
+    SolidityCheck --r
+    '''
+    Generating contracts to prevent integer overflow problems
+    '''
+    SolidityCheck --o
+    '''
+    Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		
+    '''
+    SolidityCheck --d
+    '''
+    Adjust costly loop standard	
+    '''
+    SolidityCheck --g
+    '''
+    Look at existing costly loop standard
+    '''
+    SolidityCheck --s
+    '''
+    Batch testing
+    '''
+    SolidityCheck --f
+    '''
+    Generate contracts to detect re-entrancy vulnerabilities
+	'''
+    SolidityCheck --ir
+    '''
     
 License:
 --------
