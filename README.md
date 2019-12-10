@@ -19,49 +19,50 @@ Features:
 ----------
 **Type the following commands to invoke different functions**
 
-    Get help information
+   
+Get help information
     ```
-    SolidityCheck --help
-    ```
-
-    Generating contracts to prevent re-entrancy vulnerabilities		
-    ```
-    SolidityCheck --r
+    $ SolidityCheck --help
     ```
 
-    Generating contracts to prevent integer overflow problems
+Generating contracts to prevent re-entrancy vulnerabilities		
     ```
-    SolidityCheck --o
-    ```
-
-    Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		
-    ```
-    SolidityCheck --d
+    $ SolidityCheck --r
     ```
 
-    Adjust costly loop standard	
+Generating contracts to prevent integer overflow problems
     ```
-    SolidityCheck --g
-    ```
-
-    Look at existing costly loop standard
-    ```
-    SolidityCheck --s
+    $ SolidityCheck --o
     ```
 
-    Batch testing
+Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		
     ```
-    SolidityCheck --f
+    $ SolidityCheck --d
     ```
 
-    Generate contracts to detect re-entrancy vulnerabilities
+Adjust costly loop standard	
+    ```
+    $ SolidityCheck --g
+    ```
+
+Look at existing costly loop standard
+    ```
+    $ SolidityCheck --s
+    ```
+
+Batch testing
+    ```
+    $ SolidityCheck --f
+    ```
+
+Generate contracts to detect re-entrancy vulnerabilities
 	```
-    SolidityCheck --ir
+	$ SolidityCheck --ir
     ```
     
 License:
 --------
-SolidityCheck is released under the MIT License.
+SolidityCheck is released under the MIT License. You can contact me by sending email, my email address is 1150264019@qq.com.
 
 Note:
 --------
