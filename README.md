@@ -29,7 +29,7 @@ SolidityCheck is released under the MIT License.
 
 Note:
 --------
-Because there were some problems with the original code, we deleted the previous submission record and hide the source code for the time being, and it won't be long before they come back. 
+I uploaded the test data set of the paper experiment, some contracts are stored on my another device, so the data set uploaded today is incomplete, and I will upload the complete data set tomorrow. 
 
 Warning:
 ---------
