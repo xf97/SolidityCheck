@@ -18,37 +18,37 @@ Features:
 ----------
 **Type the following commands to invoke different functions**
     Get help information
-    '''
+    ```
     SolidityCheck --help
-    '''
+    ```
     Generating contracts to prevent re-entrancy vulnerabilities		
-    '''
+    ```
     SolidityCheck --r
-    '''
+    ```
     Generating contracts to prevent integer overflow problems
-    '''
+    ```
     SolidityCheck --o
-    '''
+    ```
     Detection of 18 other problems except integer overflow and re-entrancy vulnerabilities		
-    '''
+    ```
     SolidityCheck --d
-    '''
+    ```
     Adjust costly loop standard	
-    '''
+    ```
     SolidityCheck --g
-    '''
+    ```
     Look at existing costly loop standard
-    '''
+    ```
     SolidityCheck --s
-    '''
+    ```
     Batch testing
-    '''
+    ```
     SolidityCheck --f
-    '''
+    ```
     Generate contracts to detect re-entrancy vulnerabilities
-	'''
+	```
     SolidityCheck --ir
-    '''
+    ```
     
 License:
 --------
