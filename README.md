@@ -1,5 +1,6 @@
 SolidityCheck
 =============
+![avatar](logo.jpg)
 **SolidityCheck is a static code problem detection tool based on regular expressions and program instrumentation, 
 which is developed for Ethereum smart contracts.**<br> SolidityCheck receives the source code files of smart contracts. <br>
 First, the source code is formatted so that regular expressions can be retrieved. <br>
