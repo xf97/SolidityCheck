@@ -64,9 +64,10 @@ License:
 --------
 SolidityCheck is released under the MIT License. You can contact me by sending email, my email address is 1150264019@qq.com.
 
-Note:
+Test data set:
 --------
-I uploaded the test data set of the paper experiment, some contracts are stored on my another device, so the data set uploaded today is incomplete, and I will upload the complete data set tomorrow. 
+The experimental data set we used can also be obtained. It is packaged as **test data set.zip**.
+
 
 Warning:
 ---------
