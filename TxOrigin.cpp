@@ -78,10 +78,13 @@ void TxOrigin::Detection() {
 void TxOrigin::Re_Detection()
 {
     regex reg{ TO_RE_TX };
+    regex reg1{TO_RE_TX_NOCONTRACT};
+    regex reg2{TO_RE_TX_NOCONTRACT1};
     for (int i = 0; i < content.size(); i++) {
         if (content[i].find("tx.origin") < content[i].size()) {
             smatch s;
-            if (regex_search(content[i], s, reg))
+            //tx.origin in require-statement or if-statements but "msg.sender == tx.origin" or "tx.origin == msg.sender" don't in the statement
+            if (regex_search(content[i], s, reg) && !regex_search(content[i], s, reg1) && !regex_search(content[i], s, reg2))
                 row_number.push_back(i + 1);
             else
                 continue;
