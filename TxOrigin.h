@@ -30,9 +30,6 @@ const static string TO_TX = "tx.origin";
 
 //regex
 const static string TO_RE_TX = "^(\\s)*((require)|(if))(\\s)*(\\()(.)*(tx.origin)(.)*(\\))(\\s)*";
-//update regex---2019/12/23
-const static string TO_RE_TX_NOCONTRACT = r"(tx\.origin)(\s)*(==)(\s)*(msg\.sender)";
-const static string TO_RE_TX_NOCONTRACT1 = r"(msg\.sender)(\s)*(==)(\s)*(tx\.origin)";
 
 
 //tx.origin class

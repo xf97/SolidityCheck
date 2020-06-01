@@ -101,19 +101,10 @@ void Balance::Re_Detection()
 {
     regex reg_if{ BE_RE_IF_WHILE_REQUIRE };
     regex reg_for{ BE_RE_FOR };
-    regex reg_if1(BE_RE_IF_WHILE_REQUIRE1);
-    regex reg_for1{BE_RE_FOR1};
     for (int i = 0; i < content.size(); i++) {
         if (content[i].find("this.balance") < content[i].size()) {
             smatch s;
             if (regex_match(content[i], s, reg_if) || regex_match(content[i], s, reg_for))
-                row_number.push_back((i + 1));
-            else
-                continue;
-        }
-        else if(content[i].find("address(this).balance") < content[i].size()){
-            smatch s;
-            if (regex_match(content[i], s, reg_if1) || regex_match(content[i], s, reg_for1))
                 row_number.push_back((i + 1));
             else
                 continue;

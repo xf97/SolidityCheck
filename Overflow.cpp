@@ -239,8 +239,7 @@ string Overflow::GetCode(const string & _str, const vector<string>& _ope,bool _f
             return "\n require(" + _ope[1] + "==0 || " + _ope[0] + "/" + _ope[1] + "=="+_vari+");\t //insert code\n";
         }
         else if (_str.find("-") < _str.size() && _str.find("=") < _str.size()) {
-            //2019-12-13 correct mistakes
-            return "\n require("+_vari+" > " + _ope[1] + " );\t //insert code\n";
+            return "\n require("+_vari+" > " + _ope[2] + " );\t //insert code\n";
         }
     }
     int type = GetType(_str);
