@@ -12,6 +12,15 @@ You can find our paper [here](https://arxiv.xilesou.top/abs/1911.09425).
 
 Quick start:
 -----
+We provide docker image of *SolidityCheck*, which is very convenient to obtain.
+
+Make sure that docker is installed and the network is good. Enter the following instructions in the terminal (eg., ubuntu os):
+```
+sudo docker pull xf15850673022/soliditycheck
+./SolidityCheck --help
+```
+
+and you're done!
 
 Usage:
 ------
