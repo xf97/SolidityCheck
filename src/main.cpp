@@ -31,17 +31,17 @@
 #include <iomanip>
 #include <exception>
 #include "Selfdestruct.h"
+#include "StyleCheck.h"
 
 
 void OutHelp() {
     cout << "SolidityCheck --help\tget help information\n";
-    cout << "SolidityCheck --r\tCheck for reentry vulnerabilities and generate stub files for test reentrany\n";
-    cout << "SolidityCheck --o\tCheck integer overflow and generate stub files to prevent integer overflow\n";
-    cout << "SolidityCheck --d\tScanning the contract thoroughly to check all problems except reentrancy and integer overflow\n";
-    cout << "SolidityCheck --ir\tGenerate contracts to detect re-entrancy vulnerabilities\n";
+    cout << "SolidityCheck --r <solidity source file (.sol)>\tCheck for re-entrancy vulnerabilities and generate stub files for test reentrany\n";
+    cout << "SolidityCheck --o <solidity source file (.sol)>\tCheck integer overflow and generate stub files to prevent integer overflow\n";
+    cout << "SolidityCheck --d <solidity source file (.sol)>\tScanning the contract thoroughly to check all problems except reentrancy and integer overflow\n";
+    cout << "SolidityCheck --ir <solidity source file (.sol)>\tGenerate contracts to detect re-entrancy vulnerabilities\n";
     cout << "SolidityCheck --g\tGet current gas limits for costly loop\n";
     cout << "SolidityCheck --s\tSet current gas limits for costly loop\n";
-    cout << "SolidityCheck --f\tBatch inspection\n";
     return;
 }
 
@@ -60,12 +60,11 @@ bool exist(const string filename) {
     }
 }
 
+/*
 void Detection_F_test(const string& _filePath) {
-    /*
     cout << "enter the file of contracts' name: ";
     string filename;
     cin >> filename;
-     */
     string filename = _filePath;
     ifstream inFile(filename.c_str());
     if (!inFile.is_open()) {
@@ -80,11 +79,9 @@ void Detection_F_test(const string& _filePath) {
     while (getline(inFile, temp)) {
         try {
             cout << "count: " << (i++) << endl;
-            /*
-            //�жϸú�Լ�ļ�ⱨ���Ƿ��Ѿ�����
             if (exist(temp)) {
                 continue;
-            }*/
+            }
             FileIO io(temp);
             //1.get file content
             io.ReadIn();
@@ -287,7 +284,11 @@ void Detection_F_test(const string& _filePath) {
     cout << t.timeConsuming_ds() << endl;
     cout << "done.\n";
 }
+ */
 
+
+
+/*
 void Detection_F() {
     cout << "enter the file of contracts' name: ";
     string filename;
@@ -305,11 +306,9 @@ void Detection_F() {
     while (getline(inFile, temp)) {
         try {
             cout << "count: " << (i++) << endl;
-            /*
-            //�жϸú�Լ�ļ�ⱨ���Ƿ��Ѿ�����
             if (exist(temp)) {
                 continue;
-            }*/
+            }
             FileIO io(temp);
             //1.get file content
             io.ReadIn();
@@ -512,10 +511,11 @@ void Detection_F() {
     cout << t.timeConsuming_ds() << endl;
     cout << "done.\n";
 }
+ */
 
-void Overflow_D() {
+void Overflow_D(const string& _filename) {
     //1.get file content
-    FileIO io;
+    FileIO io(_filename);
     io.ReadIn();
     //2.formatting file content
     ArrangeCode ar(io.OutString(), io.outFileName());
@@ -536,12 +536,13 @@ void Overflow_D() {
     return;
 }
 
-void Detection() {
+void Detection(const string& _filename) {
     Time t;
-    //1.get file content
-    FileIO io;
-    t.startTime();
+    Time t1, t2;
+    t1.startTime();
+    FileIO io(_filename);
     io.ReadIn();
+    t.startTime();
     //2.formatting file content
     ArrangeCode ar(io.OutString(), io.outFileName());
     ar.FormatCode();
@@ -553,6 +554,8 @@ void Detection() {
     fb.OutBackFile();
     //4.detection of vulnerabilities
     //4.1 Private Modifier
+    t1.endTime();
+    t2.startTime();
     cout << "-----Start detecting-----\n";
     cout << "0%[->........................]";
     PriModifier pr(ar.OutReport(), ar.OutVec());
@@ -743,12 +746,15 @@ void Detection() {
     //for keep the window
     cout << "-----End of detection-----\n";
     cout << "Knocking enter twice to exit.\n";
+    t2.endTime();
+    cout<<"格式化代码耗时: "<<t1.timeConsuming_ds()<<endl;
+    cout<<"检测耗时: "<<t2.timeConsuming_ds()<<endl;
     cin.get();
     cin.get();
 }
 
-void Reentrant_T(){
-    FileIO io;
+void Reentrant_T(const string& _filename){
+    FileIO io(_filename);
     io.ReadIn();
     //2.formatting file content
     ArrangeCode ar(io.OutString(), io.outFileName());
@@ -779,8 +785,8 @@ void Reentrant_T(){
     }
 }
 
-void Reentrant_D() {
-    FileIO io;
+void Reentrant_D(const string& _filename) {
+    FileIO io(_filename);
     io.ReadIn();
     //2.formatting file content
     ArrangeCode ar(io.OutString(), io.outFileName());
@@ -844,6 +850,7 @@ void SetLimit() {
 }
 
 //test function
+/*
 void test() {
     FileIO io;
     io.ReadIn();
@@ -860,7 +867,9 @@ void test() {
     MissConstru mc(ar.OutReport(), ar.OutVec());
     mc.Re_Detection();
 }
+*/
 
+/*
 int Detection_test(const string _filename){
     Time t;
     //1.get file content
@@ -927,24 +936,20 @@ int Detection_test(const string _filename){
     ot.AddString(vn.MakeReport(vn.GetRowNumber()));
     ot.AddNumber(vn.GetNumber());
     cout << "\r28%[*******->.................]";
-    /*
     //4.8 Detect send instead of transfer
     Send se(ar.OutReport(), ar.OutVec());
     //se.Detection();
     se.Re_Detection();
     ot.AddString(se.MakeReport(se.GetRowNumber()));
     ot.AddNumber(se.GetNumber());
-    */
     cout << "\r32%[********->................]";
     //4.9 Using random numbers
     //RA_Match rma;
-    /*
     Random ra(ar.OutReport(), ar.OutVec());
     //ra.Detection(rma);
     ra.Re_Detection();
     ot.AddString(ra.MakeReport(ra.GetRowNumber()));
     ot.AddNumber(ra.GetNumber());
-    */
     cout << "\r36%[*********->...............]";
     //4.10 Time Dependence
     TimeDep td(ar.OutReport(), ar.OutVec());
@@ -954,22 +959,19 @@ int Detection_test(const string _filename){
     ot.AddNumber(td.GetNumber());
     cout << "\r40%[**********->..............]";
     //4.11 Malicious libraries
-    /*
     MaliciousLib ml(ar.OutReport(), ar.OutVec());
     //ml.Detection();
     ml.Re_Detection();
     ot.AddString(ml.MakeReport(ml.GetRowNumber()));
     ot.AddNumber(ml.GetNumber());
-    */
     cout << "\r44%[***********->.............]";
     //4.12 Address Type with fixed value
-    /*
     Address ad(ar.OutReport(), ar.OutVec());
     //ad.Detection();
     ad.Re_Detection();
     ot.AddString(ad.MakeReport(ad.GetRowNumber()));
     ot.AddNumber(ad.GetNumber());
-    */
+
     cout << "\r48%[************->............]";
     //4.13 Integer Division
     IntDivision id(ar.OutReport(), ar.OutVec());
@@ -1023,14 +1025,12 @@ int Detection_test(const string _filename){
     ot.AddNumber(ff.GetNumber());
     cout << "\r76%[*******************->.....]";
     //4.20 Transfer forwards all gas
-    /*
     AllGas ag(ar.OutReport(), ar.OutVec());
     //ag.Detection();
     ag.Re_Detection();
     ot.AddString(ag.MakeReport(ag.GetRowNumber()));
     ot.AddNumber(ag.GetNumber());
     cout << "\r80%[********************->....]";
-    */
     //4.21 ERC20 API conflict
     EC_Match ec;
     ERC20 erc(ar.OutReport(), ar.OutVec());
@@ -1052,13 +1052,11 @@ int Detection_test(const string _filename){
     ot.AddString(mc.MakeReport(mc.getRowNumber()));
     ot.AddNumber(mc.GetNumber());
     cout << "\r92%[***********************->.]";
-    /*
     //4.24 Careful use of self-destructive functions
     Selfdestruct sd(ar.OutReport(), ar.OutVec());
     sd.Re_Detection();
     ot.AddString(sd.MakeReport(sd.getRowNumber()));
     ot.AddNumber(sd.GetNumber());
-    */
     cout << "\r100%[************************->]";
     cout << endl;
     //5. end detection and output report
@@ -1068,11 +1066,34 @@ int Detection_test(const string _filename){
     //for keep the window
     cout << "-----End of detection-----\n";
 }
+*/
+
+/*
+void CheckStyle(const string& _report_name){
+    styleCheck sc(_report_name);
+    sc.run();
+}
+ */
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
 int main(int argc, char** argv) {
     if (argc == 2) {
+        string command = argv[1];
+        if (command == "--help" || command=="-h") {
+            OutHelp();
+        }
+        else if (command == "--s" || command == "-s") {
+            SetLimit();
+        }
+        else if (command == "--g" || command == "-g") {
+            GetLimit();
+        }
+        else{
+            cout<<"Wrong parameter.\n";
+            cout << "Enter \"SolidityCheck --help\" to get help information.\n";
+        }
+        /*
         string command = argv[1];
         if (command == "--help" || command=="-h") {
             OutHelp();
@@ -1087,7 +1108,7 @@ int main(int argc, char** argv) {
             Overflow_D();
         }
         else if (command == "--d" || command=="-d") {
-            Detection();
+            Detection("");
         }
         else if (command == "--s" || command == "-s") {
             SetLimit();
@@ -1106,18 +1127,37 @@ int main(int argc, char** argv) {
             cout << "Enter \"SolidityCheck --help\" to get help information.\n";
         }
         return 1;
+         */
+        return 0;
     }
     else if (argc == 3){
         string command = argv[1];
-        if (command == "--d" || command == "-d"){
-            Detection_test(argv[2]);
+        if (command == "--ir" || command == "-ir"){
+            Reentrant_T(argv[2]);
         }
-        else if (command == "--f" || command == "-f"){
-            Detection_F_test(argv[2]);
+        else if (command == "--r" || command=="-r") {
+            Reentrant_D(argv[2]);
         }
+        else if (command == "--o" || command=="-o") {
+            Overflow_D(argv[2]);
+        }
+        else if (command == "--d" || command=="-d") {
+            Detection(argv[2]);
+        }
+        else if (command == "--s" || command == "-s") {
+            SetLimit();
+        }
+        else if (command == "--g" || command == "-g") {
+            GetLimit();
+        }
+        else{
+            cout<<"Wrong parameter.\n";
+            cout << "Enter \"SolidityCheck --help\" to get help information.\n";
+        }
+        return 1;
     }
     else {
-        cout << "Incorrect parameter numbers.\n";
+        cout << "Wrong number of parameters.\n";
         cout << "Enter \"SolidityCheck --help\" to get help information.\n";
         return -1;
     }

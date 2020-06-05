@@ -66,6 +66,7 @@ void FileIO::ReadIn() {
 
     //get vector
     string temp = "";
+    //getline drops '\n'
     while (getline(inFile, temp)) {
         temp.insert(0, " ");
         vec_content.push_back(temp);
