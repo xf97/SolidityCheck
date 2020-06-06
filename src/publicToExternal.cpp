@@ -159,9 +159,10 @@ vector<string> publicToExternal::replacePublic(vector<string> _content, vector<i
             int index1 = _content[i].find(" public{");
             int pos = max(index, index1);
             //cout<<_content[i].replace(pos, string(" public").size(), " external")<<endl;
-            new_content.push_back(_content[i].replace(pos, string(" public").size(), " external"));
+            new_content.push_back(_content[i].replace(pos, string(" public").size(), " external") + "\n");
         }
         else{
+            new_content.push_back(_content[i] + "\n");
             continue;
         }
     }

@@ -33,6 +33,7 @@
 #include <exception>
 #include "Selfdestruct.h"
 #include "StyleCheck.h"
+#include "wrongOperator.h"
 
 
 void OutHelp() {
@@ -734,10 +735,16 @@ void Detection(const string& _filename) {
     ot.AddString(sd.MakeReport(sd.getRowNumber()));
     ot.AddNumber(sd.GetNumber())
     */
+    //4.19 publicToExternal
     publicToExternal pte(ar.OutReport(), ar.OutVec());
     pte.Re_Detection(io.getContractName());
     ot.AddString(pte.MakeReport(pte.GetRowNumber()));
     ot.AddNumber(pte.GetNumber());
+    //4.20
+    wrongOperator wo(ar.OutReport(), ar.OutVec());
+    wo.Re_Detection(io.getContractName());
+    ot.AddString(wo.MakeReport(wo.GetRowNumber()));
+    ot.AddNumber(wo.GetNumber());
     cout << "\r100%[************************->]";
     cout << endl;
     cout << "-----End of detection-----\n";
@@ -748,6 +755,10 @@ void Detection(const string& _filename) {
     if(pte.GetNumber() != 0) {
         cout << "-----Start fixing publicToExternal bug-----\n";
         cout <<pte.makeNewFileName(io.getContractName()) <<" is generated.\n";
+    }
+    if(wo.GetNumber() != 0){
+        cout << "-----Start fixing wrongOperator bug-----\n";
+        cout << wo.makeNewFileName(io.getContractName()) <<" is generated.\n";
     }
     //for keep the window
     cout << "Knocking enter twice to exit.\n";
