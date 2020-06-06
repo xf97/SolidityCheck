@@ -29,11 +29,12 @@
 #include "DosExternal.h"
 #include "MissConstructor.h"
 #include "publicToExternal.h"
-#include <iomanip>
-#include <exception>
-#include "Selfdestruct.h"
-#include "StyleCheck.h"
+//#include <iomanip>
+//#include <exception>
+//#include "Selfdestruct.h"
+//#include "StyleCheck.h"
 #include "wrongOperator.h"
+#include "outdatedCompiler.h"
 
 
 void OutHelp() {
@@ -745,6 +746,11 @@ void Detection(const string& _filename) {
     wo.Re_Detection(io.getContractName());
     ot.AddString(wo.MakeReport(wo.GetRowNumber()));
     ot.AddNumber(wo.GetNumber());
+    //4.21
+    outdatedCompiler oc(ar.OutReport(), ar.OutVec());
+    oc.Re_Detection();
+    ot.AddString(oc.MakeReport(oc.GetRowNumber()));
+    ot.AddNumber(oc.GetNumber());
     cout << "\r100%[************************->]";
     cout << endl;
     cout << "-----End of detection-----\n";

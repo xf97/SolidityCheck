@@ -35,8 +35,8 @@ const static int VN_INDEX = 0;
 const static char NO_MATCH = '<';
 
 //regex
-const static string VN_RE_VERSION1 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\^)(\\d)(\\.)(\\d)(\\.)(\\d)(\\s)*(;)";
-const static string VN_RE_VERSION2 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\>)(\\=)(\\d)(\\.)(\\d)(\\.)(\\d)(\\s)+";
+const static string VN_RE_VERSION1 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\^)(\\d)(\\.)(\\d)(\\.)(\\d)+(\\s)*(;)";
+const static string VN_RE_VERSION2 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\>)(\\=)(\\d)(\\.)(\\d)(\\.)(\\d)+(\\s)+";
 const static string VN_RE_EXPER = "(\\s)*(pragma)(\\s)+(experimental)(\\s)+";
 
 
