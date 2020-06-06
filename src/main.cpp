@@ -28,6 +28,7 @@
 #include "Overflow.h"
 #include "DosExternal.h"
 #include "MissConstructor.h"
+#include "publicToExternal.h"
 #include <iomanip>
 #include <exception>
 #include "Selfdestruct.h"
@@ -538,8 +539,6 @@ void Overflow_D(const string& _filename) {
 
 void Detection(const string& _filename) {
     Time t;
-    Time t1, t2;
-    t1.startTime();
     FileIO io(_filename);
     io.ReadIn();
     t.startTime();
@@ -554,8 +553,6 @@ void Detection(const string& _filename) {
     fb.OutBackFile();
     //4.detection of vulnerabilities
     //4.1 Private Modifier
-    t1.endTime();
-    t2.startTime();
     cout << "-----Start detecting-----\n";
     cout << "0%[->........................]";
     PriModifier pr(ar.OutReport(), ar.OutVec());
@@ -735,20 +732,25 @@ void Detection(const string& _filename) {
     Selfdestruct sd(ar.OutReport(), ar.OutVec());
     sd.Re_Detection();
     ot.AddString(sd.MakeReport(sd.getRowNumber()));
-    ot.AddNumber(sd.GetNumber());
+    ot.AddNumber(sd.GetNumber())
     */
+    publicToExternal pte(ar.OutReport(), ar.OutVec());
+    pte.Re_Detection(io.getContractName());
+    ot.AddString(pte.MakeReport(pte.GetRowNumber()));
+    ot.AddNumber(pte.GetNumber());
     cout << "\r100%[************************->]";
     cout << endl;
+    cout << "-----End of detection-----\n";
     //5. end detection and output report
     t.endTime();
     ot.OutReport(t);
     cout << "file name: " << ar.OutReport() << endl;
+    if(pte.GetNumber() != 0) {
+        cout << "-----Start fixing publicToExternal bug-----\n";
+        cout <<pte.makeNewFileName(io.getContractName()) <<" is generated.\n";
+    }
     //for keep the window
-    cout << "-----End of detection-----\n";
     cout << "Knocking enter twice to exit.\n";
-    t2.endTime();
-    cout<<"格式化代码耗时: "<<t1.timeConsuming_ds()<<endl;
-    cout<<"检测耗时: "<<t2.timeConsuming_ds()<<endl;
     cin.get();
     cin.get();
 }
@@ -1074,6 +1076,28 @@ void CheckStyle(const string& _report_name){
     sc.run();
 }
  */
+
+/*
+void fixPublicToExternal(const string& _filename){
+    Time t;
+    FileIO io(_filename);
+    io.ReadIn();
+    t.startTime();
+    //2.formatting file content
+    ArrangeCode ar(io.OutString(), io.outFileName());
+    ar.FormatCode();
+    ar.StrToVec(ar.OutOldString());
+    io.OutToFile(ar.OutNewName(), ar.VecToStr(ar.OutVec()));
+    Output ot(io.outFileName(), ar.OutReport(), io.GetRows());
+    //3.backup formatting content
+    FileBackup fb(ar.OutOldName(), ar.OutVec());
+    fb.OutBackFile();
+    cout << "-----Start fixing publicToExternal bug-----\n";
+    publicToExternal pte(ar.OutReport(), ar.OutVec());
+    pte.Re_Detection(io.getContractName());
+    ot.AddString(mc.MakeReport(mc.getRowNumber()));
+    ot.AddNumber(mc.GetNumber());
+}*/
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 

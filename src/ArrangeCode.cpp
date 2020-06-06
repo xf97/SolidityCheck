@@ -50,6 +50,11 @@ bool FileIO::OutError(const ofstream& out) {
     return true;
 }
 
+//return origin contract's name
+string FileIO::getContractName() {
+    return filename;
+}
+
 //return file name
 string FileIO::outFileName() {
     return filename;

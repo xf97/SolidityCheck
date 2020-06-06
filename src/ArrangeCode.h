@@ -81,6 +81,8 @@ public:
     int GetRows();
     //destructor
     ~FileIO();
+    //return original contract's name
+    string getContractName();
 };
 
 //code formatting
