@@ -35,6 +35,7 @@
 //#include "StyleCheck.h"
 #include "wrongOperator.h"
 #include "outdatedCompiler.h"
+#include "deprecatedFunctions.h"
 
 
 void OutHelp() {
@@ -751,6 +752,11 @@ void Detection(const string& _filename) {
     oc.Re_Detection();
     ot.AddString(oc.MakeReport(oc.GetRowNumber()));
     ot.AddNumber(oc.GetNumber());
+    //4.22
+    deprecatedFunction df(ar.OutReport(), ar.OutVec());
+    df.Re_Detection(io.getContractName());
+    ot.AddString(df.MakeReport(df.GetRowNumber()));
+    ot.AddNumber(df.GetNumber());
     cout << "\r100%[************************->]";
     cout << endl;
     cout << "-----End of detection-----\n";
@@ -765,6 +771,10 @@ void Detection(const string& _filename) {
     if(wo.GetNumber() != 0){
         cout << "-----Start fixing wrongOperator bug-----\n";
         cout << wo.makeNewFileName(io.getContractName()) <<" is generated.\n";
+    }
+    if(df.GetNumber() != 0){
+        cout << "-----Start fixing useDeprecatedFunctions bug-----\n";
+        cout << df.makeNewFileName(io.getContractName()) <<" is generated.\n";
     }
     //for keep the window
     cout << "Knocking enter twice to exit.\n";

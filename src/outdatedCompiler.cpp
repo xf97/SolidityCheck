@@ -52,7 +52,7 @@ int outdatedCompiler::GetNumber() {
     return  row_number.size();
 }
 
-vector<int> outdatedCompiler::GetRowNumber() {
+vector<int> outdatedCompiler:: GetRowNumber() {
     return row_number;
 }
 

@@ -119,7 +119,6 @@ vector<string> wrongOperator::replaceWrongOpe(vector<string> _content, vector<in
     for (int i = 0; i<_content.size(); i++){
         if(count(_rowNumber.begin(), _rowNumber.end(), i+1)){
             smatch s;
-            smatch s1;
             if(regex_search(content[i], s, regex{WO_RE_EQU_ADD})){
                 //=+
                 new_content.push_back(regex_replace(_content[i], regex{WO_RE_EQU_ADD}, WO_ADD_EQU) + "\n");
