@@ -16,8 +16,10 @@ ByteArray::ByteArray(const string _report_name, const vector<string>& _content)
 {
     report_name = _report_name;
     content = _content;
-    BAName = "Byte Array";
-    OtherOperation = "Using byte[] instead of bytes will result in more gas consumption.\nVulnerability level:warning";
+    BAName = "Byte []";
+    OtherOperation = "The byte[] type can act as a byte array, but due to padding rules,\n"
+                     "it wastes 31 bytes of space for each element. It is better to use\n"
+                     "the bytes type instead.\nBug level: warning";
 }
 
 ByteArray::~ByteArray() {
@@ -33,11 +35,11 @@ string ByteArray::MakeReport(const vector<int>& _row_number) {
         return "No byte[].\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 15]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 11]\n";
+    _report += "bug name: ";
     _report += BAName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

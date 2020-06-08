@@ -86,7 +86,9 @@ FixedFloat::FixedFloat(const string _report_name, const vector<string> _content)
     report_name = _report_name;
     content = _content;
     FFName = "Using fixed point number type";
-    OtherOperation = "Solidity does not yet fully support fixed-length floating-point type.Fixed-length floating-point variables can be declared, but they cannot be assigned or assigned to other variables.\nVulnerability level:warning";
+    OtherOperation = "Solidity does not yet fully support fixed-length floating-point type.\n"
+                     "Fixed-length floating-point variables can be declared, but they cannot\n"
+                     "be assigned or assigned to other variables.\nBug level: block";
 }
 
 FixedFloat::~FixedFloat() {
@@ -103,11 +105,11 @@ string FixedFloat::MakeReport(const vector<int>& _row_number)
         return "No using fixed point number type.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 19]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 15]\n";
+    _report += "bug name: ";
     _report += FFName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

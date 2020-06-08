@@ -19,8 +19,15 @@ author=__xiaofeng__
 TimeDep::TimeDep(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    TDName = "Timestamp dependence.";
-    OtherOperation = "Timestamp may be affected to some extent by miners. Depending on time stamp, miners will gain unfair competitive advantage.\nVulnerability level:warning";
+    TDName = "Block values as a proxy for time";
+    OtherOperation = "In the case of block.timestamp, developers often attempt to use it to trigger \n"
+                     "time-dependent events. As Ethereum is decentralized, nodes can synchronize time \n"
+                     "only to some degree. Moreover, malicious miners can alter the timestamp of their \n"
+                     "blocks, especially if they can gain advantages by doing so. However, miners can't \n"
+                     "set a timestamp smaller than the previous one (otherwise the block will be rejected), \n"
+                     "nor can they set the timestamp too far ahead in the future. Taking all of the above \n"
+                     "into consideration, developers can't rely on the preciseness of the provided timestamp.\n"
+                     "Bug level: warning";
 }
 
 
@@ -36,14 +43,14 @@ TimeDep::~TimeDep() {
 //get detect report
 string TimeDep::MakeReport(const vector<int>& _row_number) {
     if (_row_number.empty()) {
-        return "No time dependence.\n\n";
+        return "No block values as a proxy for time.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 10]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 8]\n";
+    _report += "bug name: ";
     _report += TDName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

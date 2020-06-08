@@ -20,8 +20,12 @@ author=__xiaofeng__
 VersionNum::VersionNum(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    VNName = "Compiler version problem";
-    OtherOperation = "It is recommended to explicitly specify the compiler version used in the current contract and version operators '^' be cancelled and new versions of security specifications be added(such as \" pragma experimental \"v0.5.0\"; \"). Because future compilers may allow situations that developers haven't met before.\nVulnerability level:warning";
+    VNName = "Floating pragma";
+    OtherOperation = "Contracts should be deployed with the same compiler version and flags \n"
+                     "that they have been tested with thoroughly. Locking the pragma helps to\n"
+                     " ensure that contracts do not accidentally get deployed using, for example,\n"
+                     " an outdated compiler version that might introduce bugs that affect the \n"
+                     "contract system negatively.\nBug level: warning";
 }
 
 //destructor
@@ -47,18 +51,18 @@ string VersionNum::MakeReport(vector<int> _row_number) {
     }
 
     if (_row_number.size() == 0 && security == true) {
-        return "No complier version problem.\n\n";
+        return "No floating pragma.\n\n";
     }
     else if (_row_number.size() == 0 && security == false) {
         row_number.push_back(1);
         _row_number.push_back(1);
     }
     string _report = "";
-    _report += "[Vulnerability 7]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 7]\n";
+    _report += "bug name: ";
     _report += VNName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

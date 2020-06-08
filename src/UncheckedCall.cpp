@@ -20,8 +20,11 @@ author=_xiaofeng_
 Call::Call(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    UCName = "Mishandled exceptions.";
-    OtherOperation = "When using an external call, check its return value. The call , callcode ,delegatecall , and send functions do not terminate the program but return false when they fail to send the Ether.\nVulnerability level:error ";
+    UCName = "Unchecked call return value";
+    OtherOperation = "The return value of a message call is not checked. Execution will resume even \n"
+                     "if the called contract throws an exception. If the call fails accidentally or \n"
+                     "an attacker forces the call to fail, this may cause unexpected behaviour in the\n"
+                     " subsequent program logic.\nBug level:error ";
 }
 
 //destructor
@@ -36,14 +39,14 @@ Call::~Call() {
 //make detection report
 string Call::MakeReport(const vector<int>& _row_number) {
     if (_row_number.empty()) {
-        return "No mishandled exceptions.\n\n";
+        return "No unchecked call return value.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 4]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 4]\n";
+    _report += "bug name: ";
     _report += UCName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

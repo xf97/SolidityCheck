@@ -75,7 +75,7 @@ IntDivision::IntDivision(const string _report_name, const vector<string> _conten
     report_name = _report_name;
     content = _content;
     IDName = "Integer Division";
-    OtherOperation = "Solidity does not support floating-point numbers or decimal types. For integer division, quotients are rounded. Integer division can cause loss of accuracy.\nVulnerability level:error";
+    OtherOperation = "All integer division results in Solidity are rounded down.\nBug level: warning";
 }
 
 IntDivision::~IntDivision()
@@ -93,11 +93,11 @@ string IntDivision::MakeReport(const vector<int>& _row_number)
         return "No integer division.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 13]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 9]\n";
+    _report += "bug name: ";
     _report += IDName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

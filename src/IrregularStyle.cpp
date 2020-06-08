@@ -112,7 +112,8 @@ IrregularStyle::IrregularStyle(const string _report_name, const vector<string> _
     report_name = _report_name;
     content = _content;
     ISName = "Style guide violation.";
-    OtherOperation = "Solidity specifies how functions, events are named, and arrays are declared. Compliance with specifications improves code readability.\nVulnerability level:warning";
+    OtherOperation = "Solidity specifies how functions, events are named, and arrays are declared.\n"
+                     "Compliance with specifications improves code readability.\nBug level: warning";
 }
 
 IrregularStyle::~IrregularStyle()
@@ -129,11 +130,11 @@ string IrregularStyle::MakeReport(const vector<int>& _row_number) {
         return "No style guide violation.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 17]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 17]\n";
+    _report += "bug name: ";
     _report += ISName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

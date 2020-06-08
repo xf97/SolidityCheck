@@ -84,9 +84,13 @@ bool Match::OnlyRightBracket(const string& _str) {
 CostlyLoop::CostlyLoop(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    CLName = "Costly Loop";
+    CLName = "DoS with block gas limit";
     gas_limit = 10000;
-    OtherOperation = "Miners limit the amount of gas that each transactions can spend. Transactions beyond that limit will not succeed. Please carefully detect the number of rows where the vulnerability is located and determine that the gas cost of the cycle is within a reasonable range. \nVulnerability level:warning ";
+    OtherOperation = "When smart contracts are deployed or functions inside them are called, \n"
+                     "the execution of these actions always requires a certain amount of gas, \n"
+                     "based of how much computation is needed to complete them. The Ethereum \n"
+                     "network specifies a block gas limit and the sum of all transactions included\n"
+                     " in a block can not exceed the threshold. \nBug level: warning ";
     gas_limit = 67668;
     OutGasLimit(67688);
 }
@@ -362,14 +366,14 @@ string CostlyLoop::GetCondition(const string& _str) {
 //get report
 string CostlyLoop::MakeReport(const vector<int>& _row_number) {
     if (_row_number.empty()) {
-        return "No Costly Loop.\n\n";
+        return "No doS with block gas limit.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 2]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 2]\n";
+    _report += "bug name: ";
     _report += CLName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

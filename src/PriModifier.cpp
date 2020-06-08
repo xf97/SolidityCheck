@@ -20,8 +20,12 @@ author=_xiaofeng_
 PriModifier::PriModifier(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    PrName = "Private modifier";
-    OtherOperation = "Everything you use in smart contracts is publicly visible, even local variables and state variables marked as private.\nVulnerability level:warning";
+    PrName = "Unencrypted private data on-chain";
+    OtherOperation = "It is a common misconception that private type variables cannot be read. \n"
+                     "Even if your contract is not published, attackers can look at contract \n"
+                     "transactions to determine values stored in the state of the contract. For\n"
+                     " this reason, it's important that unencrypted private data is not stored in\n"
+                     " the contract code or state.\nBug level: warning";
 }
 
 //destructor
@@ -49,14 +53,14 @@ void PriModifier::Detection() {
 //PriModifier::MakeReport,stitching test results
 string PriModifier::MakeReport(const vector<int>& _row_number) {
     if (_row_number.empty()) {
-        return "No private modifier.\n\n";
+        return "No unencrypted private data on-Chain.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 1]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 1]\n";
+    _report += "bug name: ";
     _report += PrName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

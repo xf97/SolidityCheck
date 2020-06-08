@@ -305,8 +305,14 @@ ViLevel::ViLevel(const string _report_name, const vector<string> _content)
 {
     report_name = _report_name;
     content = _content;
-    VLName = " Implicity visibility level.";
-    OtherOperation = "Explicitly specifying the visibility of state variables and functions can effectively avoid confusion.\nVulnerability level:warning";
+    VLName = "Implicit visibility level";
+    OtherOperation = "Functions that do not have a function visibility type specified\n"
+                     "are public by default. This can lead to a vulnerability if a\n"
+                     "developer forgot to set the visibility and a malicious user\n"
+                     "is able to make unauthorized or unintended state changes.\n"
+                     "And labeling the visibility explicitly makes it easier to \n"
+                     "catch incorrect assumptions about who can access the variable.\n"
+                     "Bug level: warning";
 }
 
 ViLevel::~ViLevel() {
@@ -322,11 +328,11 @@ string ViLevel::MakeReport(const vector<int>& _row_number) {
         return "No implicit visibility level.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 18]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 14]\n";
+    _report += "bug name: ";
     _report += VLName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

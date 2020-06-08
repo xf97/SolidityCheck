@@ -18,8 +18,14 @@ author=_xiaofeng_
 TxOrigin::TxOrigin(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    TOName = "Using tx.origin for authentication";
-    OtherOperation = "TX. origin is always an external account, and using tx.origin to authenticate may be invalid.\nVulnerability level:error";
+    TOName = "Authorization through tx.origin";
+    OtherOperation = "tx.origin is a global variable in Solidity which returns the \n"
+                     "address of the account that sent the transaction. Using the variable\n"
+                     " for authorization could make a contract vulnerable if an authorized\n"
+                     " account calls into a malicious contract. A call could be made to the\n"
+                     " vulnerable contract that passes the authorization check since tx.origin\n"
+                     " returns the original sender of the transaction which in this case is the\n"
+                     " authorized account.\nBug level: error";
 }
 
 //destructor
@@ -34,14 +40,14 @@ TxOrigin::~TxOrigin() {
 //make detect report
 string TxOrigin::MakeReport(const vector<int>& _row_number) {
     if (_row_number.empty()) {
-        return "No tx.origin for authentication .\n\n";
+        return "No authorization through tx.origin.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 5]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 5]\n";
+    _report += "bug name: ";
     _report += TOName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

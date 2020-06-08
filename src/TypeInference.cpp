@@ -20,7 +20,7 @@ TypeInfer::TypeInfer(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
     TIName = "Unsafe type inference";
-    OtherOperation = "Unsafe type inference. Using type inference can lead to erroneous consequences (such as infinite loops).\nVulnerability level:error";
+    OtherOperation = "Unsafe type inference. Using type inference can lead to erroneous consequences (such as infinite loops).\nBug level: error";
 }
 
 //destructor
@@ -38,11 +38,11 @@ string TypeInfer::MakeReport(const vector<int>& _row_number) {
         return "No unsafe type inference.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 6]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 6]\n";
+    _report += "bug name: ";
     _report += TIName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

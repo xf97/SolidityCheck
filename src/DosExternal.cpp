@@ -61,8 +61,12 @@ Dos::Dos(const string _report_name, const vector<string> _content)
 {
     report_name = _report_name;
     content = _content;
-    DEName = "Dos by external contract.";
-    OtherOperation = "Do not depend on the return value of the external contract, the external contract may be killed.\nVulnerability level:error ";
+    DEName = "DoS with failed call";
+    OtherOperation = "External calls can fail accidentally or deliberately, which can cause a DoS condition in the contract.\n"
+                     "To minimize the damage caused by such failures, it is better to isolate each external call into its own\n"
+                     "transaction that can be initiated by the recipient of the call. This is especially relevant for payments,\n"
+                     "where it is better to let users withdraw funds rather than push funds to them automatically (this also\n"
+                     "reduces the chance of problems with the gas limit).\nBug level: warning";
 }
 
 Dos::~Dos()
@@ -90,11 +94,11 @@ string Dos::MakeReport(const vector<int>& _row_number)
         return "No dos by external contract.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 22]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 17]\n";
+    _report += "bug name: ";
     _report += DEName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

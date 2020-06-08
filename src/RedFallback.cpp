@@ -65,7 +65,9 @@ RedFallback::RedFallback(const string _report_name, const vector<string> _conten
     report_name = _report_name;
     content = _content;
     RFName = "Redundant refusal of payment";
-    OtherOperation = "The 0.4.0 version of solidity language will automatically supplement fallback function for contracts. The fallback functions provided by contract writers may bring security risks.\nVulnerability level:error";
+    OtherOperation = "The 0.4.0 version of Solidity language will automatically \n"
+                     "supplement fallback function for contracts. The fallback functions\n"
+                     "provided by contract writers may bring security risks.\nBug level: warning";
     VersionNum = 5;
 }
 
@@ -82,11 +84,11 @@ string RedFallback::MakeReport(const vector<int>& _row_number) {
         return "No redundant refusal of payment.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 16]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 12]\n";
+    _report += "bug name: ";
     _report += RFName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

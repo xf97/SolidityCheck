@@ -313,7 +313,8 @@ ERC20::ERC20(const string _report_name, const vector<string> _content)
     report_name = _report_name;
     content = _content;
     ECName = "Token API violation.";
-    OtherOperation = "In ERC20-compliant contracts, it does not recommend throwing exceptions in functions that return bool values, such as approve, transfer, transferFrom.\nVulnerability level:warning";
+    OtherOperation = "In ERC20-compliant contracts, it does not recommend throwing exceptions in functions that return bool\n"
+                     "values, such as approve, transfer, transferFrom.\nBug level: warning";
     ERC20Flag = false;
     ERC721Flag = false;
     ERC165Flag = false;
@@ -330,14 +331,14 @@ ERC20::~ERC20() {
 string ERC20::MakeReport(const vector<int>& _row_number)
 {
     if (_row_number.empty()) {
-        return "No Token API violation.\n\n";
+        return "No token API violation.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 21]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 16]\n";
+    _report += "bug name: ";
     _report += ECName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

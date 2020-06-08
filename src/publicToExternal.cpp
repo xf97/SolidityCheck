@@ -30,8 +30,8 @@ string publicToExternal::MakeReport(const vector<int> &_row_number) {
         return "No public function that could be declared as external.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 19]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 19]\n";
+    _report += "bug name: ";
     _report += PTEName;
     _report += '\n';
     _report += "number of bugs: ";

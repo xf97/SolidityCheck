@@ -51,45 +51,36 @@ bool LockedMoney::IsAssembly(const string & _str)
         return false;
     regex reg{ LM_ASSEMBLY };
     smatch s;
-    if (regex_search(_str, s, reg))
-        return true;
-    return false;
+    return regex_search(_str, s, reg);
 }
 
 bool LockedMoney::IsPayable(const string & _str)
 {
-    if (_str.find(LM_PAY) < _str.size())
-        return true;
-    return false;
+    return _str.find(LM_PAY) < _str.size();
 }
 
 bool LockedMoney::IsSend(const string & _str)
 {
-    if (_str.find(LM_SEND) < _str.size() || _str.find(".send ")<_str.size())
-        return true;
-    return false;
+    return _str.find(LM_SEND) < _str.size() || _str.find(".send ") < _str.size();
 }
 
 bool LockedMoney::IsTransfer(const string & _str)
 {
-    if (_str.find(LM_TRANSFER) < _str.size() || _str.find(".transfer ")<_str.size())
-        return true;
-    return false;
+    return _str.find(LM_TRANSFER) < _str.size() || _str.find(".transfer ") < _str.size();
 }
 
 bool LockedMoney::IsCallValue(const string & _str)
 {
-    if (_str.find(LM_CALLVALUE) < _str.size())
-        return true;
-    return false;
+    return _str.find(LM_CALLVALUE) < _str.size();
 }
 
 LockedMoney::LockedMoney(const string _report_name, const vector<string> _content)
 {
     report_name = _report_name;
     content = _content;
-    LMName = "Locked Money";
-    OtherOperation = "Contracts that receive external transfers should have at least one export for the transfer of ether.\nVulnerability level:error";
+    LMName = "Locked ether";
+    OtherOperation = " If the contract can receive ethers, but cannot send ethers, the\n"
+                     "ethers in the contract will be permanently locked.\nBug level: error";
     flag = false;
 }
 
@@ -105,14 +96,14 @@ LockedMoney::~LockedMoney()
 string LockedMoney::MakeReport(const vector<int>& _row_number)
 {
     if (flag==false) {
-        return "No locked money.\n\n";
+        return "No locked ether.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 14]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 10]\n";
+    _report += "bug name: ";
     _report += LMName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

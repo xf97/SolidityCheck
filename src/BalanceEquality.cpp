@@ -25,8 +25,11 @@ author=_xiaofeng_
 Balance::Balance(const string _report_name, const vector<string> _content) {
     content = _content;
     report_name = _report_name;
-    BEName = "Balance equality";
-    OtherOperation = "Avoid strict comparisons of contract balances. An attacker can force a change in the balance of the contract either by selfdestruct or by mining to send the ether. \nVulnerability level:error ";
+    BEName = "Unexpected ether balance";
+    OtherOperation = "Contracts can behave erroneously when they strictly assume a specific Ether balance.\n"
+                     "It is always possible to forcibly send ether to a contract (without triggering its fallback \n"
+                     "function), using selfdestruct, or by mining to the account. In the worst case scenario this \n"
+                     "could lead to DOS conditions that might render the contract unusable. \nBug level: error ";
 }
 
 //destructor
@@ -41,14 +44,14 @@ Balance::~Balance() {
 //get report
 string Balance::MakeReport(const vector<int>& _row_number) {
     if (_row_number.size() == 0) {
-        return "No balanace equality.\n\n";
+        return "No unexpected ether balance.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 3]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 3]\n";
+    _report += "bug name: ";
     _report += BEName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";

@@ -577,14 +577,12 @@ void Detection(const string& _filename) {
     //4.detection of vulnerabilities
     //4.1 Private Modifier
     cout << "-----Start detecting-----\n";
-    //cout << "0%[->........................]";
     progressDisplay(23, 0, "*", ".");
     PriModifier pr(ar.OutReport(), ar.OutVec());
     pr.Detection();
     ot.AddString(pr.MakeReport(pr.GetRowNumber()));
     ot.AddNumber(pr.GetNumber());
     progressDisplay(23, 1, "*", ".");
-    //cout << "\r4%[*->.......................]";
     //4.2 Costly Loop
     Match ma;
     CostlyLoop cl(ar.OutReport(), ar.OutVec());
@@ -592,96 +590,50 @@ void Detection(const string& _filename) {
     ot.AddString(cl.MakeReport(cl.GetRowNumber()));
     ot.AddNumber(cl.GetNumber());
     progressDisplay(23, 2, "*", ".");
-    //cout << "\r8%[**->......................]";
     //4.3 Balance equality
     Balance be(ar.OutReport(), ar.OutVec());
     be.Re_Detection();
     ot.AddString(be.MakeReport(be.GetRowNumber()));
     ot.AddNumber(be.GetNumber());
     progressDisplay(23, 3, "*", ".");
-    //cout << "\r12%[***->.....................]";
     //4.4 Unchecked external call
     Call uc(ar.OutReport(), ar.OutVec());
     uc.Re_Detection();
     ot.AddString(uc.MakeReport(uc.GetRowNumber()));
     ot.AddNumber(uc.GetNumber());
     progressDisplay(23, 4, "*", ".");
-    //cout << "\r16%[****->....................]";
     //4.5 Using Tx.origin
     TxOrigin tx(ar.OutReport(), ar.OutVec());
     tx.Re_Detection();
     ot.AddString(tx.MakeReport(tx.GetRowNumber()));
     ot.AddNumber(tx.GetNumber());
     progressDisplay(23, 5, "*", ".");
-    //cout << "\r20%[*****->...................]";
     //4.6 Unsafe type inference
     TypeInfer ti(ar.OutReport(), ar.OutVec());
     ti.Re_Detection();
     ot.AddString(ti.MakeReport(ti.GetRowNumber()));
     ot.AddNumber(ti.GetNumber());
     progressDisplay(23, 6, "*", ".");
-    //cout << "\r24%[******->..................]";
     //4.7 Detect complier version
     VersionNum vn(ar.OutReport(), ar.OutVec());
     vn.Re_Detection();
     ot.AddString(vn.MakeReport(vn.GetRowNumber()));
     ot.AddNumber(vn.GetNumber());
     progressDisplay(23, 7, "*", ".");
-    //cout << "\r28%[*******->.................]";
-    /*
-    //4.8 Detect send instead of transfer
-    Send se(ar.OutReport(), ar.OutVec());
-    //se.Detection();
-    se.Re_Detection();
-    ot.AddString(se.MakeReport(se.GetRowNumber()));
-    ot.AddNumber(se.GetNumber());
-    */
-    //cout << "\r32%[********->................]";
-    //4.9 Using random numbers
-    //RA_Match rma;
-    /*
-    Random ra(ar.OutReport(), ar.OutVec());
-    //ra.Detection(rma);
-    ra.Re_Detection();
-    ot.AddString(ra.MakeReport(ra.GetRowNumber()));
-    ot.AddNumber(ra.GetNumber());
-    */
-    //cout << "\r36%[*********->...............]";
-    //4.10 Time Dependence
+    //4.8 Time Dependence
     TimeDep td(ar.OutReport(), ar.OutVec());
     //td.Detection();
     td.Re_Detection();
     ot.AddString(td.MakeReport(td.GetRowNumber()));
     ot.AddNumber(td.GetNumber());
     progressDisplay(23, 8, "*", ".");
-    //cout << "\r40%[**********->..............]";
-    //4.11 Malicious libraries
-    /*
-    MaliciousLib ml(ar.OutReport(), ar.OutVec());
-    //ml.Detection();
-    ml.Re_Detection();
-    ot.AddString(ml.MakeReport(ml.GetRowNumber()));
-    ot.AddNumber(ml.GetNumber());
-    */
-    //cout << "\r44%[***********->.............]";
-    //4.12 Address Type with fixed value
-    /*
-    Address ad(ar.OutReport(), ar.OutVec());
-    //ad.Detection();
-    ad.Re_Detection();
-    ot.AddString(ad.MakeReport(ad.GetRowNumber()));
-    ot.AddNumber(ad.GetNumber());
-    */
-    //cout << "\r48%[************->............]";
-    //4.13 Integer Division
+    //4.9 Integer Division
     IntDivision id(ar.OutReport(), ar.OutVec());
-    //id.Detection();
     id.Re_Detection();
     ot.AddString(id.MakeReport(id.GetRowNumber()));
     ot.AddNumber(id.GetNumber());
     progressDisplay(23, 9, "*", ".");
-    //cout << "\r52%[*************->...........]";
-    //4.14 Locked Money
+    //4.10 Locked Money
     LM_Match lm_ma;
     LockedMoney lm(ar.OutReport(), ar.OutVec());
     //lm.Detection();
@@ -689,30 +641,25 @@ void Detection(const string& _filename) {
     ot.AddString(lm.MakeReport(lm.GetRowNumber()));
     ot.AddNumber(lm.GetNumber());
     progressDisplay(23, 10, "*", ".");
-    //cout << "\r56%[**************->..........]";
-    //4.15 Byte Array
+    //4.11 Byte Array
     ByteArray ba(ar.OutReport(), ar.OutVec());
     //ba.Detection();
     ba.Re_Detection();
     ot.AddString(ba.MakeReport(ba.GetRowNumber()));
     ot.AddNumber(ba.GetNumber());
     progressDisplay(23, 11, "*", ".");
-    //cout << "\r60%[***************->.........]";
-    //4.16 Redundant fallback
+    //4.12 Redundant fallback
     RedFallback rf(ar.OutReport(), ar.OutVec());
     rf.Re_Detection();
     ot.AddString(rf.MakeReport(rf.GetRowNumber()));
     ot.AddNumber(rf.GetNumber());
     progressDisplay(23, 12, "*", ".");
-    //cout << "\r64%[****************->........]";
     //4.17 Irregular style
     IrregularStyle is(ar.OutReport(), ar.OutVec());
-    //is.Detection();
     is.Re_Detection();
     ot.AddString(is.MakeReport(is.GetRowNumber()));
     ot.AddNumber(is.GetNumber());
     progressDisplay(23, 13, "*", ".");
-    //cout << "\r68%[*****************->.......]";
     //4.18 Visibility Level
     VL_Match vl_match;
     ViLevel vl(ar.OutReport(), ar.OutVec());
@@ -729,16 +676,6 @@ void Detection(const string& _filename) {
     ot.AddString(ff.MakeReport(ff.GetRowNumber()));
     ot.AddNumber(ff.GetNumber());
     progressDisplay(23, 15, "*", ".");
-    //cout << "\r76%[*******************->.....]";
-    //4.20 Transfer forwards all gas
-    /*
-    AllGas ag(ar.OutReport(), ar.OutVec());
-    //ag.Detection();
-    ag.Re_Detection();
-    ot.AddString(ag.MakeReport(ag.GetRowNumber()));
-    ot.AddNumber(ag.GetNumber());
-    cout << "\r80%[********************->....]";
-    */
     //4.21 ERC20 API conflict
     EC_Match ec;
     ERC20 erc(ar.OutReport(), ar.OutVec());
@@ -749,7 +686,6 @@ void Detection(const string& _filename) {
     //cout << "\r84%[*********************->...]";
     //4.22 Dos by external call
     Dos ds(ar.OutReport(), ar.OutVec());
-    //ds.Detection();
     ds.Re_Detection();
     ot.AddString(ds.MakeReport(ds.GetRowNumber()));
     ot.AddNumber(ds.GetNumber());
@@ -762,14 +698,6 @@ void Detection(const string& _filename) {
     ot.AddString(mc.MakeReport(mc.getRowNumber()));
     ot.AddNumber(mc.GetNumber());
     progressDisplay(23, 18, "*", ".");
-    //cout << "\r92%[***********************->.]";
-    /*
-    //4.24 Careful use of self-destructive functions
-    Selfdestruct sd(ar.OutReport(), ar.OutVec());
-    sd.Re_Detection();
-    ot.AddString(sd.MakeReport(sd.getRowNumber()));
-    ot.AddNumber(sd.GetNumber())
-    */
     //4.19 publicToExternal
     publicToExternal pte(ar.OutReport(), ar.OutVec());
     pte.Re_Detection(io.getContractName());

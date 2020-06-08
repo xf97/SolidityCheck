@@ -62,16 +62,12 @@ string MissConstru::getConName(const string & _str)
 {
     int right;
     int left = _str.find("contract");
-    //�ӹ�"contract"�ؼ���
     left += 8;
-    //�ٴ��ӹ��ո�
     while (left < _str.size() && isblank(_str[left]))
         left++;
-    //��ʼ��ȡ��Լ��
     right = left;
     while (right < _str.size() && (isalnum(_str[right]) || _str[right] == '_') && _str[right]!= '{')
         right++;
-    //���غ�Լ��
     return _str.substr(left, right-left);
 }
 
@@ -89,8 +85,14 @@ MissConstru::MissConstru(const string _report_name, const vector<string> _conten
 {
     report_name = _report_name;
     content = _content;
-    MCName = "Missing Constructor";
-    OtherOperation = "Missing constructors may cause contract safety problems. Please add a constructor, or check the spelling of the function names of existing constructors.\nVulnerability level:error";
+    MCName = "Incorrect constructor name";
+    OtherOperation = "Constructors are special functions that are called only once during the contract creation.\n"
+                     "They often perform critical, privileged actions such as setting the owner of the contract.\n "
+                     "Before Solidity version 0.4.22, the only way of defining a constructor was to create a function\n "
+                     "with the same name as the contract class containing it. A function meant to become a constructor\n"
+                     "becomes a normal, callable function if its name doesn't exactly match the contract name. This\n"
+                     "behavior sometimes leads to security issues, in particular when smart contract code is re-used\n"
+                     "with a different name but the name of the constructor function is not changed accordingly.\nBug level:error";
 }
 
 MissConstru::~MissConstru()
@@ -108,11 +110,11 @@ string MissConstru::MakeReport(const vector<int>& _row_number)
         return "No missing constructor.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 23]\n";
-    _report += "vulnerability name: ";
+    _report += "[Bug 18]\n";
+    _report += "bug name: ";
     _report += MCName;
     _report += '\n';
-    _report += "number of vulnerabilities: ";
+    _report += "number of bugs: ";
     _report += to_string(_row_number.size());
     _report += '\n';
     _report += "row number: ";
