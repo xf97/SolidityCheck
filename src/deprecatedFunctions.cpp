@@ -10,7 +10,10 @@ deprecatedFunction::deprecatedFunction(const string _report_name, const vector<s
     content = _content;
     DFName = "Use of deprecated solidity functions";
     referenceUrl = "https://swcregistry.io/docs/SWC-111";
-    OtherOperation = "Several functions and operators in Solidity are deprecated. Using them leads to reduced code quality. With new major versions of the Solidity compiler, deprecated functions and operators may result in side effects and compile errors. Please refer to " + referenceUrl +" for details.\nBug level:warning";
+    OtherOperation = "Several functions and operators in Solidity are deprecated. \n"
+                     "Using them leads to reduced code quality. With new major versions\n"
+                     "of the Solidity compiler, deprecated functions and operators may\n"
+                     "result in side effects and compile errors. Please refer to " + referenceUrl + " for details.\nBug level: warning";
 }
 
 deprecatedFunction::~deprecatedFunction() {

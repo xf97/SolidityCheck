@@ -9,7 +9,9 @@ outdatedCompiler::outdatedCompiler(const string _report_name, const vector<strin
     report_name = _report_name;
     content = _content;
     OCName = "Outdated Compiler Version";
-    OtherOperation = "Using an outdated compiler version can be problematic especially if there are publicly disclosed bugs and issues that affect the current compiler version.\nVulnerability level:warning";
+    OtherOperation = "Using an outdated compiler version can be problematic especially if\n"
+                     "there are publicly disclosed bugs and issues that affect the current\n"
+                     "compiler version.\nBug level: warning";
     standard = "0.4.24";
 }
 

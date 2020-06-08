@@ -11,7 +11,9 @@ TransactionOrderDep::TransactionOrderDep(const string _report_name, const vector
     report_name = _report_name;
     content = _content;
     TODName = "Transaction order dependence";
-    OtherOperation = "Miners can decide which transactions are packaged into the blocks and the order in which transactions are packaged. The current main impact of this kind of bugs is the approve function in the ERC20 token standard.\nBug level: warning";
+    OtherOperation = "Miners can decide which transactions are packaged into the blocks and the\n"
+                     "order in which transactions are packaged. The current main impact of this\n"
+                     "kind of bugs is the approve function in the ERC20 token standard.\nBug level: warning";
 }
 
 TransactionOrderDep::~TransactionOrderDep() {

@@ -10,8 +10,9 @@
 wrongOperator::wrongOperator(const string _report_name, const vector<string> _content) {
     report_name = _report_name;
     content = _content;
-    WOName = "Wrong operator";
-    OtherOperation = "Users can use =+ and =- operators in the integer operation without compiling errors (up to and including version 0.4.26)\nBug level: error";
+    WOName = "Typographical error";
+    OtherOperation = "Users can use =+ and =- operators in the integer operation\n"
+                     "without compiling errors (up to and including version 0.4.26)\nBug level: error";
 }
 
 wrongOperator::~wrongOperator() {
@@ -24,10 +25,10 @@ wrongOperator::~wrongOperator() {
 
 string wrongOperator::MakeReport(const vector<int> &_row_number) {
     if (_row_number.empty()) {
-        return "No wrong operator.\n\n";
+        return "No typographical error.\n\n";
     }
     string _report = "";
-    _report += "[Vulnerability 20]\n";
+    _report += "[Bug 20]\n";
     _report += "bug name: ";
     _report += WOName;
     _report += '\n';
