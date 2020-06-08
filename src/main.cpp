@@ -36,6 +36,7 @@
 #include "wrongOperator.h"
 #include "outdatedCompiler.h"
 #include "deprecatedFunctions.h"
+#include "TransactionOrderDep.h"
 
 
 void OutHelp() {
@@ -47,6 +48,25 @@ void OutHelp() {
     cout << "SolidityCheck --g\tGet current gas limits for costly loop\n";
     cout << "SolidityCheck --s\tSet current gas limits for costly loop\n";
     return;
+}
+
+void progressDisplay(int _totalNumber, int _nowNumber, string _doneChar, string _undoChar){
+    string process = "\r";
+    process += to_string(100 * _nowNumber / _totalNumber );
+    process += "%[";
+    int temp = _nowNumber;
+    while (temp > 1){
+        process += _doneChar;
+        temp --;
+    }
+    process += "->";
+    temp = (_totalNumber - _nowNumber);
+    while (temp > 1){
+        process += _undoChar;
+        temp --;
+    }
+    process += "]";
+    cout<< process;
 }
 
 bool exist(const string filename) {
@@ -557,54 +577,57 @@ void Detection(const string& _filename) {
     //4.detection of vulnerabilities
     //4.1 Private Modifier
     cout << "-----Start detecting-----\n";
-    cout << "0%[->........................]";
+    //cout << "0%[->........................]";
+    progressDisplay(23, 0, "*", ".");
     PriModifier pr(ar.OutReport(), ar.OutVec());
     pr.Detection();
     ot.AddString(pr.MakeReport(pr.GetRowNumber()));
     ot.AddNumber(pr.GetNumber());
-    cout << "\r4%[*->.......................]";
+    progressDisplay(23, 1, "*", ".");
+    //cout << "\r4%[*->.......................]";
     //4.2 Costly Loop
     Match ma;
     CostlyLoop cl(ar.OutReport(), ar.OutVec());
     cl.Detection(ma);
     ot.AddString(cl.MakeReport(cl.GetRowNumber()));
     ot.AddNumber(cl.GetNumber());
-    cout << "\r8%[**->......................]";
+    progressDisplay(23, 2, "*", ".");
+    //cout << "\r8%[**->......................]";
     //4.3 Balance equality
     Balance be(ar.OutReport(), ar.OutVec());
-    //be.Detection();
     be.Re_Detection();
     ot.AddString(be.MakeReport(be.GetRowNumber()));
     ot.AddNumber(be.GetNumber());
-    cout << "\r12%[***->.....................]";
+    progressDisplay(23, 3, "*", ".");
+    //cout << "\r12%[***->.....................]";
     //4.4 Unchecked external call
     Call uc(ar.OutReport(), ar.OutVec());
-    //uc.Detection();
     uc.Re_Detection();
     ot.AddString(uc.MakeReport(uc.GetRowNumber()));
     ot.AddNumber(uc.GetNumber());
-    cout << "\r16%[****->....................]";
+    progressDisplay(23, 4, "*", ".");
+    //cout << "\r16%[****->....................]";
     //4.5 Using Tx.origin
     TxOrigin tx(ar.OutReport(), ar.OutVec());
-    //tx.Detection();
     tx.Re_Detection();
     ot.AddString(tx.MakeReport(tx.GetRowNumber()));
     ot.AddNumber(tx.GetNumber());
-    cout << "\r20%[*****->...................]";
+    progressDisplay(23, 5, "*", ".");
+    //cout << "\r20%[*****->...................]";
     //4.6 Unsafe type inference
     TypeInfer ti(ar.OutReport(), ar.OutVec());
-    //ti.Detection();
     ti.Re_Detection();
     ot.AddString(ti.MakeReport(ti.GetRowNumber()));
     ot.AddNumber(ti.GetNumber());
-    cout << "\r24%[******->..................]";
+    progressDisplay(23, 6, "*", ".");
+    //cout << "\r24%[******->..................]";
     //4.7 Detect complier version
     VersionNum vn(ar.OutReport(), ar.OutVec());
-    //vn.Detection();
     vn.Re_Detection();
     ot.AddString(vn.MakeReport(vn.GetRowNumber()));
     ot.AddNumber(vn.GetNumber());
-    cout << "\r28%[*******->.................]";
+    progressDisplay(23, 7, "*", ".");
+    //cout << "\r28%[*******->.................]";
     /*
     //4.8 Detect send instead of transfer
     Send se(ar.OutReport(), ar.OutVec());
@@ -613,7 +636,7 @@ void Detection(const string& _filename) {
     ot.AddString(se.MakeReport(se.GetRowNumber()));
     ot.AddNumber(se.GetNumber());
     */
-    cout << "\r32%[********->................]";
+    //cout << "\r32%[********->................]";
     //4.9 Using random numbers
     //RA_Match rma;
     /*
@@ -623,14 +646,15 @@ void Detection(const string& _filename) {
     ot.AddString(ra.MakeReport(ra.GetRowNumber()));
     ot.AddNumber(ra.GetNumber());
     */
-    cout << "\r36%[*********->...............]";
+    //cout << "\r36%[*********->...............]";
     //4.10 Time Dependence
     TimeDep td(ar.OutReport(), ar.OutVec());
     //td.Detection();
     td.Re_Detection();
     ot.AddString(td.MakeReport(td.GetRowNumber()));
     ot.AddNumber(td.GetNumber());
-    cout << "\r40%[**********->..............]";
+    progressDisplay(23, 8, "*", ".");
+    //cout << "\r40%[**********->..............]";
     //4.11 Malicious libraries
     /*
     MaliciousLib ml(ar.OutReport(), ar.OutVec());
@@ -639,7 +663,7 @@ void Detection(const string& _filename) {
     ot.AddString(ml.MakeReport(ml.GetRowNumber()));
     ot.AddNumber(ml.GetNumber());
     */
-    cout << "\r44%[***********->.............]";
+    //cout << "\r44%[***********->.............]";
     //4.12 Address Type with fixed value
     /*
     Address ad(ar.OutReport(), ar.OutVec());
@@ -648,14 +672,15 @@ void Detection(const string& _filename) {
     ot.AddString(ad.MakeReport(ad.GetRowNumber()));
     ot.AddNumber(ad.GetNumber());
     */
-    cout << "\r48%[************->............]";
+    //cout << "\r48%[************->............]";
     //4.13 Integer Division
     IntDivision id(ar.OutReport(), ar.OutVec());
     //id.Detection();
     id.Re_Detection();
     ot.AddString(id.MakeReport(id.GetRowNumber()));
     ot.AddNumber(id.GetNumber());
-    cout << "\r52%[*************->...........]";
+    progressDisplay(23, 9, "*", ".");
+    //cout << "\r52%[*************->...........]";
     //4.14 Locked Money
     LM_Match lm_ma;
     LockedMoney lm(ar.OutReport(), ar.OutVec());
@@ -663,28 +688,31 @@ void Detection(const string& _filename) {
     lm.Re_Detection(lm_ma);
     ot.AddString(lm.MakeReport(lm.GetRowNumber()));
     ot.AddNumber(lm.GetNumber());
-    cout << "\r56%[**************->..........]";
+    progressDisplay(23, 10, "*", ".");
+    //cout << "\r56%[**************->..........]";
     //4.15 Byte Array
     ByteArray ba(ar.OutReport(), ar.OutVec());
     //ba.Detection();
     ba.Re_Detection();
     ot.AddString(ba.MakeReport(ba.GetRowNumber()));
     ot.AddNumber(ba.GetNumber());
-    cout << "\r60%[***************->.........]";
+    progressDisplay(23, 11, "*", ".");
+    //cout << "\r60%[***************->.........]";
     //4.16 Redundant fallback
     RedFallback rf(ar.OutReport(), ar.OutVec());
-    //rf.Detection();
     rf.Re_Detection();
     ot.AddString(rf.MakeReport(rf.GetRowNumber()));
     ot.AddNumber(rf.GetNumber());
-    cout << "\r64%[****************->........]";
+    progressDisplay(23, 12, "*", ".");
+    //cout << "\r64%[****************->........]";
     //4.17 Irregular style
     IrregularStyle is(ar.OutReport(), ar.OutVec());
     //is.Detection();
     is.Re_Detection();
     ot.AddString(is.MakeReport(is.GetRowNumber()));
     ot.AddNumber(is.GetNumber());
-    cout << "\r68%[*****************->.......]";
+    progressDisplay(23, 13, "*", ".");
+    //cout << "\r68%[*****************->.......]";
     //4.18 Visibility Level
     VL_Match vl_match;
     ViLevel vl(ar.OutReport(), ar.OutVec());
@@ -692,14 +720,16 @@ void Detection(const string& _filename) {
     vl.New_Re_Detection(vl_match);
     ot.AddString(vl.MakeReport(vl.GetRowNumber()));
     ot.AddNumber(vl.GetNumber());
-    cout << "\r72%[******************->......]";
+    progressDisplay(23, 14, "*", ".");
+    //cout << "\r72%[******************->......]";
     //4.19 Using float
     FixedFloat ff(ar.OutReport(), ar.OutVec());
     //ff.Detection();
     ff.Re_Detection();
     ot.AddString(ff.MakeReport(ff.GetRowNumber()));
     ot.AddNumber(ff.GetNumber());
-    cout << "\r76%[*******************->.....]";
+    progressDisplay(23, 15, "*", ".");
+    //cout << "\r76%[*******************->.....]";
     //4.20 Transfer forwards all gas
     /*
     AllGas ag(ar.OutReport(), ar.OutVec());
@@ -715,21 +745,24 @@ void Detection(const string& _filename) {
     erc.Detection(ec);
     ot.AddString(erc.MakeReport(erc.GetRowNumber()));
     ot.AddNumber(erc.GetNumber());
-    cout << "\r84%[*********************->...]";
+    progressDisplay(23, 16, "*", ".");
+    //cout << "\r84%[*********************->...]";
     //4.22 Dos by external call
     Dos ds(ar.OutReport(), ar.OutVec());
     //ds.Detection();
     ds.Re_Detection();
     ot.AddString(ds.MakeReport(ds.GetRowNumber()));
     ot.AddNumber(ds.GetNumber());
-    cout << "\r88%[**********************->..]";
+    progressDisplay(23, 17, "*", ".");
+    //cout << "\r88%[**********************->..]";
     //4.23 Miss constructor
     MissConstru mc(ar.OutReport(), ar.OutVec());
     //mc.re_detection()
     mc.Re_Detection();
     ot.AddString(mc.MakeReport(mc.getRowNumber()));
     ot.AddNumber(mc.GetNumber());
-    cout << "\r92%[***********************->.]";
+    progressDisplay(23, 18, "*", ".");
+    //cout << "\r92%[***********************->.]";
     /*
     //4.24 Careful use of self-destructive functions
     Selfdestruct sd(ar.OutReport(), ar.OutVec());
@@ -742,22 +775,31 @@ void Detection(const string& _filename) {
     pte.Re_Detection(io.getContractName());
     ot.AddString(pte.MakeReport(pte.GetRowNumber()));
     ot.AddNumber(pte.GetNumber());
+    progressDisplay(23, 19, "*", ".");
     //4.20
     wrongOperator wo(ar.OutReport(), ar.OutVec());
     wo.Re_Detection(io.getContractName());
     ot.AddString(wo.MakeReport(wo.GetRowNumber()));
     ot.AddNumber(wo.GetNumber());
+    progressDisplay(23, 20, "*", ".");
     //4.21
     outdatedCompiler oc(ar.OutReport(), ar.OutVec());
     oc.Re_Detection();
     ot.AddString(oc.MakeReport(oc.GetRowNumber()));
     ot.AddNumber(oc.GetNumber());
+    progressDisplay(23, 21, "*", ".");
     //4.22
     deprecatedFunction df(ar.OutReport(), ar.OutVec());
     df.Re_Detection(io.getContractName());
     ot.AddString(df.MakeReport(df.GetRowNumber()));
     ot.AddNumber(df.GetNumber());
-    cout << "\r100%[************************->]";
+    progressDisplay(23, 22, "*", ".");
+    //4.23
+    TransactionOrderDep tod(ar.OutReport(), ar.OutVec());
+    tod.Re_Detection();
+    ot.AddString(tod.MakeReport(tod.GetRowNumber()));
+    ot.AddNumber(tod.GetNumber());
+    progressDisplay(23, 23, "*", ".");
     cout << endl;
     cout << "-----End of detection-----\n";
     //5. end detection and output report

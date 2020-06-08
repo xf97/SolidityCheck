@@ -95,7 +95,7 @@ void publicToExternal::outFixContract(const vector<string> _content, const strin
 
     outFile << new_content;
     outFile.close();
-    cout << "Contract (fix public function that could be declared as external bugs) generation completed.\n";
+    //cout << "Contract (fix public function that could be declared as external bugs) generation completed.\n";
 }
 
 string publicToExternal::makeNewFileName(const string& _filename) {
