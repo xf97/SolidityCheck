@@ -24,7 +24,7 @@ using namespace std;
 
 //const constants
 const string ROWNUM = "row number ";
-const string BACKUPSUFFIX = "_backup.txt";
+const string BACKUPSUFFIX = "_backup_please_refer_to_this_file_for_bug_location.txt";
 
 //file backup class
 class FileBackup {
