@@ -138,7 +138,7 @@ void deprecatedFunction::outFixContract(const vector<string> _content, const str
     ofstream outFile(new_fileName.c_str());
     outFile << new_content;
     outFile.close();
-    cout << "Contract (fix use of deprecated solidity functions bug) generation completed.\n";
+    //cout << "Contract (fix use of deprecated solidity functions bug) generation completed.\n";
 }
 
 string deprecatedFunction::makeNewFileName(const string &_filename) {

@@ -92,7 +92,7 @@ void wrongOperator::outFixContract(const vector<string> _content, const string &
     ofstream outFile(new_fileName.c_str());
     outFile << new_content;
     outFile.close();
-    cout << "Contract (fix wrong operator bugs) generation completed.\n";
+    //cout << "Contract (fix wrong operator bugs) generation completed.\n";
 }
 
 string wrongOperator::makeNewFileName(const string &_filename) {

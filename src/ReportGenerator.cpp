@@ -49,7 +49,7 @@ void Output::OutReport(Time& t) {
     outFile << "file name: " << file_name << endl;
     outFile << "number of lines of code: " << code_rows << endl;
     outFile << "use time: " << t.timeConsuming_ds() << " s." << endl;
-    outFile << "total number of vulnerabilities: " << numbers << endl;
+    outFile << "total number of bugs: " << numbers << endl;
     outFile << "\n";
     auto i = report_content.begin();
     for (; i != report_content.end(); i++)
