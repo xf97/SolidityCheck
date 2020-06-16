@@ -91,7 +91,7 @@ vector<int> Dos::GetRowNumber()
 string Dos::MakeReport(const vector<int>& _row_number)
 {
     if (_row_number.empty()) {
-        return "No dos by external contract.\n\n";
+        return "No dos by failed call.\n\n";
     }
     string _report = "";
     _report += "[Bug 17]\n";
