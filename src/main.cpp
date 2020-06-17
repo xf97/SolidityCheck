@@ -43,7 +43,7 @@ void OutHelp() {
     cout << "SolidityCheck --help\tget help information\n";
     cout << "SolidityCheck --r <solidity source file (.sol)>\tCheck for re-entrancy vulnerabilities and generate stub files for test reentrany\n";
     cout << "SolidityCheck --o <solidity source file (.sol)>\tCheck integer overflow and generate stub files to prevent integer overflow\n";
-    cout << "SolidityCheck --d <solidity source file (.sol)>\tScanning the contract thoroughly to check all problems except reentrancy and integer overflow\n";
+    cout << "SolidityCheck --d <solidity source file (.sol)>\tScanning the contract thoroughly to detect 23 kinds of bugs (include fixing 3 kinds of bugs)\n";
     cout << "SolidityCheck --ir <solidity source file (.sol)>\tGenerate contracts to detect re-entrancy vulnerabilities\n";
     cout << "SolidityCheck --g\tGet current gas limits for costly loop\n";
     cout << "SolidityCheck --s\tSet current gas limits for costly loop\n";
