@@ -74,7 +74,8 @@ Generate contracts to detect re-entrancy vulnerabilities
 	$ SolidityCheck --ir
     ```
     
-#Exception workaround:
+Exception workaround:
+--------
 SolidityCheck sometimes has abnormalities. We found that the known abnormalities are caused by file encoding. Now we provide an effective solution:
 1. Copy the **src/changeFileEncode.py** file to the same path as the contract to be tested.
 2. Run the following command `python changeFileEncode.py`
