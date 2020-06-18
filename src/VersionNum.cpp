@@ -157,11 +157,16 @@ vector<int> VersionNum::GetRowNumber() {
 
 void VersionNum::Re_Detection()
 {
-    bool pragma = false;
+    //bool pragma = false;
+    int pragma = 0;
+
     //Whether version operator '^' are used
     for (int i = 0; i < content.size(); i++) {
         if (IsPragmaSolidity(content[i])) {
-            pragma = true;
+            pragma += 1;
+            //cout<<content[i]<<" : ";
+
+            //cout<<endl;
             if (ContainOpe(content[i])) {
                 regex reg_v1{ VN_RE_VERSION1 };
                 smatch s;
@@ -178,4 +183,60 @@ void VersionNum::Re_Detection()
     if (!pragma) {
         row_number.push_back((1));
     }
+    else if (pragma > 1){
+        vector<pair<string, string>> allVersion;
+        for (int i = 0; i < content.size(); i++){
+            if (IsPragmaSolidity(content[i])) {
+                //cout<<content[i]<<": ";
+                pair<string, string> nowVersion = getNowVersion(content[i]);
+                //cout<<nowVersion.first<<" "<<nowVersion.second<<endl;
+                if(allVersion.empty()){
+                    allVersion.push_back(nowVersion);
+                }
+                else if (isDiff(nowVersion, allVersion)){
+                    //cout<<content[i]<<endl;
+                    if(!count(row_number.begin(), row_number.end(), (i+1))){
+                        row_number.push_back((i+1));
+                    }
+                    allVersion.push_back(nowVersion);
+                }
+            }
+        }
+    }
+}
+
+bool VersionNum::isDiff(const pair<string, string> &_now, const vector<pair<string, string> > &_all) {
+    //cout
+    for (const auto & i : _all){
+        if (i == _now){
+            return false;
+        }
+    }
+    return true;
+}
+
+pair<string, string> VersionNum::getNowVersion(const string &_str) {
+    pair<string, string> nowVersion{"0.0.0", "0.0.0"};
+    auto iterStart = _str.begin();
+    auto iterEnd = _str.end();
+    string temp;
+    smatch s;
+    int number = 0;
+    while (regex_search(iterStart, iterEnd, s, regex{VN_RE_GETVERSION}))
+    {
+        if (number >= 2){
+            break;
+        }
+        temp = s[0];
+        //cout << temp << " ";
+        if (number == 0){
+            nowVersion.first = temp;
+        }
+        else if (number == 1){
+            nowVersion.second = temp;
+        }
+        number += 1;
+        iterStart = s[0].second;	//更新搜索起始位置,搜索剩下的字符串
+    }
+    return nowVersion;
 }

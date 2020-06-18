@@ -83,6 +83,24 @@ void FileIO::ReadIn() {
     inFile.close();
 }
 
+void FileIO::outVectorToFile(const string& _filename, const vector<string> &_content) {
+    ofstream fout;
+    fout.open(_filename,ios_base::out);
+    if(fout.is_open())
+    {
+        for(auto i=_content.begin(),end=_content.end(); i!=end; ++i)
+        {
+            if ((*i).find('\n')){
+                fout<<(*i);
+            }
+            else{
+                fout<<(*i)<<endl;
+            }
+        }
+    }
+    fout.close();
+}
+
 //output to vector
 vector<string> FileIO::OutVector() {
     return vec_content;
@@ -131,6 +149,7 @@ ArrangeCode::ArrangeCode(const string _old_content, const string _old_name) {
     old_name = _old_name;
     GetNewName(_old_name);
     GetReportName(_old_name);
+    //cout<<old_content<<endl;
 }
 
 //ArrangeCode::OutOldName,return old_name
@@ -168,6 +187,7 @@ void ArrangeCode::FilterSingle(const string& _old_str, string& _new_str) {
         if (_old_str[i] == '/' && _old_str[i + 1] == '/') {
             while (_old_str[i] != '\n')
                 i++;
+            i += 1;
         }
         else {
             _new_str += _old_str[i];
@@ -234,7 +254,7 @@ void ArrangeCode::FilterMul(const string& _old_str, string& _new_str) {
 //contract definitions/declarations must are in one line
 void ArrangeCode::ArrangeConDef(const string& type, string& _old_str) {
     int index = 0;
-    while (1) {
+    while (true) {
         index = _old_str.find(type, index);
         if (index < _old_str.size()) {
             while (_old_str[index] != '{' && _old_str[index] != ';') {
@@ -246,6 +266,7 @@ void ArrangeCode::ArrangeConDef(const string& type, string& _old_str) {
         else
             break;
     }
+    //cout<<_old_str<<endl;
 }
 
 //ArrangeCode::Seprate.Make the last'}'of the contract/interface/library body alone
@@ -399,6 +420,7 @@ void ArrangeCode::StripSpace(string& _str) {
     }
     //deleted elements
     _str.erase(_str.begin() + tail, _str.end());
+    //cout<<_str<<endl;
 }
 
 void ArrangeCode::ArrangeLoopDef(const string& type, string& _old_str) {
@@ -477,20 +499,34 @@ void ArrangeCode::split(const string& _str, vector<string>& vec, const char flag
 //ArrangeCode::StrToVec,Each \n split line becomes an element of the vector<string>
 void ArrangeCode::StrToVec(const string& content) {
     split(content, vec_content, '\n');
+    /*
+    for(auto i = vec_content.begin(); i != vec_content.end(); i++){
+        cout<<(*i)<<endl;
+    }*/
     FilterBlankLine();
     Strip(vec_content);
     vec_content=SpecialFor(vec_content);
     FilterBlankLine();
+    //cout<<"*******************"<<endl;
+    /*for(auto i = vec_content.begin(); i != vec_content.end(); i++){
+        cout<<(*i)<<endl;
+    }*/
+    /*
+    for(auto i = vec_content.begin(); i != vec_content.end(); i++){
+        cout<<(*i)<<endl;
+    }*/
 }
 
 //ArrangeCode::VecToStr,input:vector<string>,output:string
 string ArrangeCode::VecToStr(const vector<string>& _vec) {
     string temp = "";
     for (auto i = _vec.begin(); i != _vec.end(); i++) {
+        //cout<<(*i)<<endl;
         if (IsBlankLine(*i))
             continue;
         else {
-            temp += (*i);
+            //cout<<(*i)<<endl;
+            temp.append((*i));
             temp += '\n';
         }
     }
@@ -520,21 +556,28 @@ void ArrangeCode::ArrangeRemain(const string& _old_str, string& _new_str) {
         else
             _new_str += _old_str[i];
     }
+    //cout<<_new_str<<endl;
 }
 
 //ArrangeCode::formatcode
 void ArrangeCode::FormatCode() {
     //1.filter single line comments
     FilterSingle(old_content, new_content);
+    //cout<<new_content<<endl;
     //2.filter multiline comments
     FilterMul(new_content, old_content);
-    JustOneLine(old_content);
+    //cout<<old_content<<endl;
+    //JustOneLine(old_content);
+    //cout<<old_content<<endl;
     //3.arrange contract/interface/library definitions/declarations
     ArrangeConDef(CON, old_content);
+    //cout<<old_content<<endl;
     ArrangeConDef(INT, old_content);
     ArrangeConDef(LIB, old_content);
     //4.arrange function/modifier definitions/declarations
     ArrangeFunDef(FUN, old_content);
+    //cout<<"*************"<<endl;
+    //cout<<old_content<<endl;
     ArrangeFunDef(MOD, old_content);
     ArrangeFunDef(EVE, old_content);
     //5.arrange the if/while/for statements
@@ -549,7 +592,9 @@ void ArrangeCode::FormatCode() {
     //7.Make the remaining statements complete in one line
     ArrangeRemain(old_content, new_content);
     //8. Patching discovered vulnerabilities
-    old_content = JustOneLine(old_content);
+    //cout<<new_content<<endl;
+    old_content = JustOneLine(new_content);
+    //cout<<old_content<<endl;
     StripSpace(old_content);
 }
 

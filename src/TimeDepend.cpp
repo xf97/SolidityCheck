@@ -123,5 +123,37 @@ void TimeDep::Re_Detection()
                 row_number.push_back(i + 1);
             }
         }
+        else if (content[i].find("block.number") < content[i].size()){
+            regex reg1{TD_RE_BLOCKNUMBER};
+            smatch  s;
+            if (regex_search(content[i], s, reg1)){
+                row_number.push_back((i + 1));
+            }
+        }
+        else if (content[i].find("block.coinbase") < content[i].size()){
+            regex reg2{TD_RE_COINBASE};
+            smatch s;
+            if (regex_search(content[i], s, reg2)){
+                row_number.push_back((i+1));
+            }
+        }
+        else if (content[i].find("block.difficulty") < content[i].size()){
+            regex reg3{TD_RE_DIFFICULTY};
+            smatch s;
+            if(regex_search(content[i], s, reg3)){
+                row_number.push_back((i+1));
+            }
+        }
+        else if (content[i].find("blockhash") < content[i].size()){
+            regex reg4{TD_RE_BLOCKHASH1};
+            regex reg5{TD_RE_BLOCKHASH2};
+            smatch s, s1;
+            if(regex_search(content[i], s, reg5)){
+                row_number.push_back((i+1));
+            }
+            else if(regex_search(content[i], s1, reg4)){
+                row_number.push_back((i+1));
+            }
+        }
     }
 }

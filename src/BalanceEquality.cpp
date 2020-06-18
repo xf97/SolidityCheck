@@ -105,12 +105,29 @@ void Balance::Re_Detection()
     regex reg_if{ BE_RE_IF_WHILE_REQUIRE };
     regex reg_for{ BE_RE_FOR };
     for (int i = 0; i < content.size(); i++) {
-        if (content[i].find("this.balance") < content[i].size()) {
+        if (content[i].find(".balance") < content[i].size()) {
             smatch s;
+            /*
             if (regex_match(content[i], s, reg_if) || regex_match(content[i], s, reg_for))
                 row_number.push_back((i + 1));
             else
                 continue;
+            */
+            if(regex_search(content[i], s, regex{BE_RE_LEFT_EQUAL1})){
+                row_number.push_back((i+1));
+            }
+            else if(regex_search(content[i], s, regex{BE_RE_LEFT_EQUAL2})){
+                row_number.push_back((i+1));
+            }
+            else if(regex_search(content[i], s, regex{BE_RE_RIGHT_EQUAL1})){
+                row_number.push_back((i+1));
+            }
+            else if(regex_search(content[i], s, regex{BE_RE_RIGHT_EQUAL2})){
+                row_number.push_back((i+1));
+            }
+            else{
+                continue;
+            }
         }
         else
             continue;

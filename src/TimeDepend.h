@@ -31,6 +31,11 @@ const static string TD_BLOCK = "block.timestamp";
 
 //regex
 const static string TD_RE_TIME = "(((\\b)(now)(\\b))|((\\b)(block.timestamp)(\\b)))";
+const static string TD_RE_BLOCKNUMBER = "(\\b)(block)(\\.)(number)(\\b)";
+const static string TD_RE_COINBASE = "(\\b)(block)(\\.)(coinbase)(\\b)";
+const static string TD_RE_DIFFICULTY = "(\\b)(block)(\\.)(difficulty)(\\b)";
+const static string TD_RE_BLOCKHASH1 = "(\\b)(blockhash)(\\s)*(\\()";
+const static string TD_RE_BLOCKHASH2 = "(\\b)(block)(\\.)(blockhash)(\\s)*(\\()";
 
 //class TimeDep
 class TimeDep {

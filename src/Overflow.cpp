@@ -232,7 +232,7 @@ vector<string> Overflow::GetOpe(const string & _str)
     return results;
 }
 
-string Overflow::GetCode(const string & _str, const vector<string>& _ope,bool _flag,string _vari)
+string Overflow::GetCode(const string & _str, const vector<string>& _ope,bool _flag, string _vari)
 {
     if (_flag) {
         if (_str.find("*") < _str.size() && _str.find("=") < _str.size()) {
@@ -369,7 +369,7 @@ void Overflow::Detection()
             InsertFlag = true;
             row_number.push_back((i + 1));
             vector<string> opes = GetOpe(content[i]);
-            string no = "";
+            string no;
             string insertCode = GetCode(content[i], opes,flag,no);
             content[i] += insertCode;
         }
@@ -384,7 +384,8 @@ void Overflow::Detection()
                 content[i] = RewriteCon(content[i], opes,count);
                 flag = true;
             }
-            string insertCode = GetCode(temp, opes,flag,GetVariable(count));
+            string insertCode = GetCode(temp, opes,flag, "anti_overflow_temp_" + to_string(count));
+            //cout<<insertCode<<endl;
             flag = false;
             content[i] += insertCode;
         }

@@ -45,6 +45,10 @@ const static string BE_REQUIRE2 = " require ";
 //the regex define of Balance equality
 const static string BE_RE_IF_WHILE_REQUIRE = "^(\\s)*((if)|(require)|(while))(\\s)*(\\()(.)*(((this.balance)(\\s)*(==)(\\s)*(\\d)+(\\s)*(ether))|((\\d)+(\\s)*(ether)(\\s)*(==)(\\s)*(this.balance)))(.)*(\\))(.)*$";
 const static string BE_RE_FOR = "^(\\s)*(for)(\\s)*(\\()(.)*(;)(.)*(((this.balance)(\\s)*(==)(\\s)*(\\d)+(\\s)*(ether))|((\\d)+(\\s)*(ether)(\\s)*(==)(\\s)*(this.balance)))(.)*(;)(.)*(\\))(.)*$";
+const static string BE_RE_LEFT_EQUAL1 = "(\\b)(address)(\\()(.)+(\\))(\\.)(balance)(\\s)*(==)(\\s)*(\\w)+(\\b)";
+const static string BE_RE_LEFT_EQUAL2 = "(\\b)(this)(\\s)*(\\.)(\\s)*(balance)(\\s)*(==)(\\s)*(\\w)+(\\b)";
+const static string BE_RE_RIGHT_EQUAL1 = "(\\b)(\\w)+(\\s)*(==)(\\s)*(address)(\\()(.)+(\\))(\\.)(balance)(\\b)";
+const static string BE_RE_RIGHT_EQUAL2 = "(\\b)(\\w)+(\\s)*(==)(\\s)*(this)(\\s)*(\\.)(\\s)*(balance)(\\b)";
 
 class Balance {
 private:

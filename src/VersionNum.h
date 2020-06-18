@@ -21,6 +21,7 @@ author=__xiaofeng__
 #include <algorithm>
 #include <iterator>
 #include <regex>
+#include <utility>
 
 //using namespace
 using namespace std;
@@ -38,6 +39,7 @@ const static char NO_MATCH = '<';
 const static string VN_RE_VERSION1 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\^)(\\d)(\\.)(\\d)(\\.)(\\d)+(\\s)*(;)";
 const static string VN_RE_VERSION2 = "(\\s)*(pragma)(\\s)+(solidity)(\\s)+(\\>)(\\=)(\\d)(\\.)(\\d)(\\.)(\\d)+(\\s)+";
 const static string VN_RE_EXPER = "(\\s)*(pragma)(\\s)+(experimental)(\\s)+";
+const static string VN_RE_GETVERSION = "(\\b)(\\d)(\\.)(\\d)(\\.)(\\d)+(\\b)";
 
 
 //class version
@@ -55,6 +57,8 @@ protected:
     bool IsSecurity(const string& _str);
     void AddReport();
     bool IsNewOpe(const string& _str);
+    pair<string, string> getNowVersion(const string& _str);
+    bool isDiff(const pair<string, string>& _now, const vector<pair<string, string>>& _all);
 public:
     //constructor
     VersionNum(const string _report_name, const vector<string> _content);

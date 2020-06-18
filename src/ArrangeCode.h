@@ -45,6 +45,9 @@ const static string REPORTSUFFIX = "_detect.report";
 //for regex
 const static string AR_RE_FOR = "(\\s)*(for)(\\s)*(\\()";
 
+//regex
+const static string RE_CON = "(\\b)(contract)(\\s)";
+
 //independent output for vector<string>
 ostream & operator<<(ostream& os, const vector<string>& vec);
 
@@ -83,6 +86,8 @@ public:
     ~FileIO();
     //return original contract's name
     string getContractName();
+    //out vector<string> to file
+    void outVectorToFile(const string& _filename, const vector<string>& _content);
 };
 
 //code formatting

@@ -176,16 +176,19 @@ vector<string> deprecatedFunction::replaceDeprecated(vector<string> _content, ve
                 new_content.push_back(regex_replace(_content[i], regex{DF_RE_SHA3}, " keccak256(") + "\n");
             }
             else if (regex_search(content[i], s, regex{DF_RE_CALLCODE})){
-                new_content.push_back(regex_replace(_content[i], regex{DF_RE_CALLCODE}, " delegatecall(") + "\n");
+                new_content.push_back(regex_replace(_content[i], regex{DF_RE_CALLCODE}, ".delegatecall(") + "\n");
             }
             else if (regex_search(content[i], s, regex{DF_RE_THROW})){
-                new_content.push_back(regex_replace(_content[i], regex{DF_RE_THROW}, " revert(") + "\n");
+                new_content.push_back(regex_replace(_content[i], regex{DF_RE_THROW}, " revert()"));
             }
             else if (regex_search(content[i], s, regex{DF_RE_MSGGAS})){
                 new_content.push_back(regex_replace(_content[i], regex{DF_RE_MSGGAS}, " gasleft()") + "\n");
             }
             else if (regex_search(content[i], s, regex{DF_RE_CONSTANT})){
                 new_content.push_back(regex_replace(_content[i], regex{DF_RE_CONSTANT}, " view") + "\n");
+            }
+            else if (regex_search(content[i], s, regex{DF_RE_VAR})){
+                new_content.push_back(content[i] + "\n");
             }
         }
         else{

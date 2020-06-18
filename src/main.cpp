@@ -684,7 +684,7 @@ void Detection(const string& _filename) {
     ot.AddNumber(erc.GetNumber());
     progressDisplay(23, 16, "*", ".");
     //cout << "\r84%[*********************->...]";
-    //4.22 Dos by external call
+    //4.22 Dos by failed call
     Dos ds(ar.OutReport(), ar.OutVec());
     ds.Re_Detection();
     ot.AddString(ds.MakeReport(ds.GetRowNumber()));
@@ -704,25 +704,25 @@ void Detection(const string& _filename) {
     ot.AddString(pte.MakeReport(pte.GetRowNumber()));
     ot.AddNumber(pte.GetNumber());
     progressDisplay(23, 19, "*", ".");
-    //4.20
+    //4.20 wrong operator
     wrongOperator wo(ar.OutReport(), ar.OutVec());
     wo.Re_Detection(io.getContractName());
     ot.AddString(wo.MakeReport(wo.GetRowNumber()));
     ot.AddNumber(wo.GetNumber());
     progressDisplay(23, 20, "*", ".");
-    //4.21
+    //4.21 outdated compiler
     outdatedCompiler oc(ar.OutReport(), ar.OutVec());
     oc.Re_Detection();
     ot.AddString(oc.MakeReport(oc.GetRowNumber()));
     ot.AddNumber(oc.GetNumber());
     progressDisplay(23, 21, "*", ".");
-    //4.22
+    //4.22 deprecatedFunction
     deprecatedFunction df(ar.OutReport(), ar.OutVec());
     df.Re_Detection(io.getContractName());
     ot.AddString(df.MakeReport(df.GetRowNumber()));
     ot.AddNumber(df.GetNumber());
     progressDisplay(23, 22, "*", ".");
-    //4.23
+    //4.23 TOD
     TransactionOrderDep tod(ar.OutReport(), ar.OutVec());
     tod.Re_Detection();
     ot.AddString(tod.MakeReport(tod.GetRowNumber()));
@@ -761,6 +761,9 @@ void Reentrant_T(const string& _filename){
     ar.StrToVec(ar.OutOldString());
     io.OutToFile(ar.OutNewName(), ar.VecToStr(ar.OutVec()));
     Output ot(io.outFileName(), ar.OutReport(), io.GetRows());
+    //3.backup formatting content
+    FileBackup fb(ar.OutOldName(), ar.OutVec());
+    fb.OutBackFile();
     //Detect Reentrancy
     Reentrant re(ar.OutReport(), ar.OutVec());
     //re.Detection();
@@ -792,7 +795,11 @@ void Reentrant_D(const string& _filename) {
     ar.FormatCode();
     ar.StrToVec(ar.OutOldString());
     io.OutToFile(ar.OutNewName(), ar.VecToStr(ar.OutVec()));
+    //io.OutToFile(ar.OutNewName(), ar.VecToStr(ar.OutVec()));
     Output ot(io.outFileName(), ar.OutReport(), io.GetRows());
+    //3. output back file
+    FileBackup fb(ar.OutOldName(), ar.OutVec());
+    fb.OutBackFile();
     //Detect Reentrancy
     Reentrant re(ar.OutReport(), ar.OutVec());
     //re.Detection();
