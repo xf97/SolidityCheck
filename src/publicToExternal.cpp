@@ -140,7 +140,7 @@ bool publicToExternal::findFunction(const vector<string> &_content, const string
         if ((i+1) == lineNumber){
             continue;
         }
-        else if (_content[i].find(search_target1) < _content[i].size() || _content[i].find(search_target2) < _content[i].size()){
+        else if ((_content[i].find(search_target1) < _content[i].size() || _content[i].find(search_target2) < _content[i].size()) && _content[i].find("function") >= _content[i].size()){
             flag = true;
             break;
         }

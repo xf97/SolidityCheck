@@ -748,8 +748,8 @@ void Detection(const string& _filename) {
     }
     //for keep the window
     cout << "Knocking enter twice to exit.\n";
-    cin.get();
-    cin.get();
+    //cin.get();
+    //cin.get();
 }
 
 void Reentrant_T(const string& _filename){
