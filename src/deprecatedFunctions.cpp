@@ -105,8 +105,9 @@ void deprecatedFunction::Re_Detection(const string& _filename) {
         }
         else if (content[i].find(DF_CONSTANT) < content[i].size()){
             regex reg{DF_RE_CONSTANT};
+            regex reg1{DF_RE_FUNCTION};
             smatch s;
-            if (regex_search(content[i], s, reg)){
+            if (regex_search(content[i], s, reg) && !regex_search(content[i], s, reg1)){
                 row_number.push_back((i+1));
             }
         }

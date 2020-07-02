@@ -45,6 +45,7 @@ const static string DF_RE_THROW = "(\\s)(throw)(\\b)";
 const static string DF_RE_MSGGAS = "(\\s)(msg)(\\s)*(\\.)(\\s)*(gas)(\\b)";
 const static string DF_RE_CONSTANT = "(\\s)(constant)(\\b)";
 const static string DF_RE_VAR = "(\\s)(var)(\\b)";
+const static string DF_RE_FUNCTION = "(\\s)(function)(\\s)";
 
 //class
 class deprecatedFunction{
