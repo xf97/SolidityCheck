@@ -130,7 +130,7 @@ string IrregularStyle::MakeReport(const vector<int>& _row_number) {
         return "No style guide violation.\n\n";
     }
     string _report = "";
-    _report += "[Bug 17]\n";
+    _report += "[Bug 1３]\n";
     _report += "bug name: ";
     _report += ISName;
     _report += '\n';
@@ -188,7 +188,7 @@ void IrregularStyle::Detection()
     }
 }
 
-void IrregularStyle::Re_Detection()
+void IrregularStyle:: Re_Detection()
 {
     for (int i = 0; i < content.size(); i++) {
         if (content[i].find("function")<content[i].size()) {

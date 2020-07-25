@@ -285,9 +285,7 @@ bool ERC20::IsFun(const string & _str)
     if (_str.find(EC_FUN1) < _str.size()) {
         string name = "";
         GetFunName(_str, name);
-        //cout << _str << endl;
         if (name == EC_APPROVE || name == EC_TRANSFER || name == EC_TRANSFROM || name == EC_isApprovedForAll || name == EC_supportsInterface) {
-            //cout << "������." << name << endl;
             return true;
         }
         return false;
@@ -367,8 +365,7 @@ vector<int> ERC20::GetRowNumber() {
 void ERC20::Detection(EC_Match& ec) {
     string temp = "";
     for (auto i = content.begin(); i != content.end(); i++) {
-        if (IsCI(*i)) {;
-            //cout << "����Լ." << (*i) << endl;
+        if (IsCI(*i)) {
             GetName(*i, temp);
             temp = GetUpper(temp);
             if (IsERC20(temp)) {
@@ -390,7 +387,6 @@ void ERC20::Detection(EC_Match& ec) {
     if (ERC20Flag == false && ERC721Flag == false && ERC165Flag == false)
         return;
     else {
-        //cout << "ʶ��ɹ�.\n";
         vector<string> temp_name{ temp };
         GetSons(temp_name);
         for (int i = 0; i < content.size(); i++)
