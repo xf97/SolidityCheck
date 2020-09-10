@@ -7,7 +7,6 @@ SolidityCheck
 **SolidityCheck** receives the *Solidity* source code files of smart contracts. 
 First, the source code is formatted so that regular expressions can be retrieved. Then the bug statements are matched by specific regular expressions to locate the position of the problem statement. For **re-entrancy vulnerabilities** and **integer overflow bugs**, SolidityCheck combines program instrumentation to prevent these two problems. Experiments show that SolidityCheck is a very effective smart contract problem analysis tool with very high recall rate and detection efficiency.
 
-You can find our paper [here](https://arxiv.xilesou.top/abs/1911.09425).
 
 
 Quick start:
