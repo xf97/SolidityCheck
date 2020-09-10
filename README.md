@@ -83,16 +83,6 @@ SolidityCheck sometimes has abnormalities. We found that the known abnormalities
 
 License:
 --------
-SolidityCheck is released under the MIT License. You can contact me by sending email, my email address is 1150264019@qq.com.
-
-Test data set:
---------
-The experimental data set we used can also be obtained. It is packaged as **test data set.zip**.
-
-
-Warning:
----------
-This procedure has been applied for patent protection, any infringement of intellectual property will be taken to law.
-
+SolidityCheck is released under the MIT License. 
 
 
