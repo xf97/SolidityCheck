@@ -1,5 +1,12 @@
+# [Warning] Any use of *SolidtyCheck* to publish a paper without my consent is an infringement of IP rights! I will investigate the responsibility of the infringers!
+
+# [Attention] If you want to use this project's code, please contact me by email.
+
+
+
 SolidityCheck
 =============
+
 <img src="./logo.jpg" alt="Logo" width="500"/>
 
 **SolidityCheck is a static code problem analysis tool based on regular expressions and program instrumentation, which is developed for Ethereum smart contracts.**
@@ -32,7 +39,7 @@ Features:
 ----------
 **Type the following commands to invoke different functions**
 
-   
+
 Get help information
     ```
     $ SolidityCheck --help
