@@ -1,6 +1,5 @@
 # [Warning] Any use of *SolidtyCheck* to publish a paper without my consent is an infringement of IP rights! I will investigate the responsibility of the infringers!
 
-# [Attention] If you want to use this project's code, please contact me by email.
 
 
 
